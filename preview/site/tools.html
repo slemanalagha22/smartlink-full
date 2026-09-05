@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-darkmode="false" data-theme-pref="light">
+<head>
+<meta charset="utf-8">
+<title>SMARTLink — الأدوات</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="../../luci-theme-smartlink/htdocs/luci-static/smartlink/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../luci-theme-smartlink/htdocs/luci-static/smartlink/cascade.css">
+<link rel="stylesheet" href="../../luci-app-smartlink/htdocs/luci-static/resources/smartlink-app/fonts.css">
+<link rel="stylesheet" href="../../luci-app-smartlink/htdocs/luci-static/resources/smartlink-app/app.css">
+<link rel="stylesheet" href="../../luci-app-smartlink/htdocs/luci-static/resources/smartlink-app/pages.css">
+</head>
+<body class="lang_ar" data-page="tools">
+
+<header class="sl-header">
+	<div class="sl-header-inner">
+		<a class="brand" href="dashboard.html"><svg class="sl-logo" viewBox="0 0 32 32" aria-hidden="true"><rect x="1" y="1" width="30" height="30" rx="8" fill="currentColor" opacity=".16"/><path fill="currentColor" d="M20.8 10.4a6.6 6.6 0 0 0-4.9-2 6.6 6.6 0 0 0-4.7 1.9c-.6.6-.6 1.5 0 2.1.6.6 1.5.6 2.1 0a3.7 3.7 0 0 1 2.6-1c1 0 1.9.4 2.7 1.1.6.6 1.5.5 2.1-.1.6-.6.6-1.4.1-2Zm3.4-3.5A11.4 11.4 0 0 0 16 3.6c-3 0-5.9 1.2-8.1 3.3-.6.6-.6 1.5 0 2.1.6.6 1.5.6 2.1 0A8.4 8.4 0 0 1 16 6.6c2.2 0 4.3.8 5.9 2.3.6.6 1.6.6 2.2 0 .6-.6.6-1.5.1-2Zm-8.2 8.7a3.6 3.6 0 0 0-3.6 3.6c0 .9.3 1.7.9 2.4l2.7 3.2 2.7-3.2c.6-.7.9-1.5.9-2.4a3.6 3.6 0 0 0-3.6-3.6Z"/></svg><span>SMARTLink</span></a>
+		<ul class="nav" id="topmenu"><li class=""><a href="dashboard.html">الرئيسية</a></li><li class="dropdown "><a class="menu" href="#">الشبكة</a><ul class="dropdown-menu"><li class=""><a href="network.html">نظرة عامة</a></li><li class=""><a href="devices.html">الأجهزة المتصلة</a></li><li class=""><a href="wireless.html">الشبكة اللاسلكية</a></li><li class=""><a href="lan.html">الشبكة المحلية</a></li><li class=""><a href="internet.html">الإنترنت</a></li></ul></li><li class=""><a href="application.html">التطبيق</a></li><li class="active"><a href="tools.html">الأدوات</a></li><li class="dropdown "><a class="menu" href="#">الإعداد</a><ul class="dropdown-menu"><li class=""><a href="welcome.html">مرحباً</a></li><li class=""><a href="setup1.html">الخطوة 1</a></li><li class=""><a href="setup2.html">الخطوة 2</a></li><li class=""><a href="setupdone.html">اكتمل الإعداد</a></li></ul></li></ul>
+		<div class="sl-header-actions">
+			<div id="indicators"><span class="label">معاينة</span></div>
+			<button type="button" class="sl-icon-btn sl-theme-toggle" id="sl-theme-toggle"
+			        title="تبديل النمط"><svg class="sl-ico sl-ico-sun" viewBox="0 -960 960 960"><path d="M480-360q50 0 85-35t35-85q0-50-35-85t-85-35q-50 0-85 35t-35 85q0 50 35 85t85 35Zm0 60q-75 0-127.5-52.5T300-480q0-75 52.5-127.5T480-660q75 0 127.5 52.5T660-480q0 75-52.5 127.5T480-300ZM200-450H40v-60h160v60Zm720 0H760v-60h160v60ZM450-760v-160h60v160h-60Zm0 720v-160h60v160h-60ZM260-655l-101-97 43-44 96 100-38 41Zm441 442-97-101 41-39 99 97-43 43Zm-97-442 97-101 43 41-100 99-40-39ZM254-212l-42-44 98-96 22 19 20 21-98 100Z"/></svg><svg class="sl-ico sl-ico-moon" viewBox="0 -960 960 960"><path d="M480-120q-150 0-255-105T120-480q0-150 105-255t255-105q8 0 17 .5t23 1.5q-36 32-56 79t-20 99q0 90 63 153t153 63q52 0 99-18.5t79-51.5q1 12 1.5 19.5t.5 14.5q0 150-105 255T480-120Zm0-60q109 0 190-67.5T769-406q-25 11-53.5 16.5T660-384q-115 0-195.5-80.5T384-660q0-24 5-51.5t18-62.5q-98 27-162.5 109.5T180-480q0 125 87.5 212.5T480-180Z"/></svg></button>
+			<button type="button" class="sl-icon-btn sl-menu-toggle" id="sl-menu-toggle"
+			        title="القائمة"><svg class="sl-ico" viewBox="0 -960 960 960"><path d="M120-240v-60h720v60H120Zm0-210v-60h720v60H120Zm0-210v-60h720v60H120Z"/></svg></button>
+		</div>
+	</div>
+</header>
+
+<div id="maincontent" class="container">
+	<div id="view">
+		<div class="smartlink-page" data-sl-page="tools" dir="rtl" lang="ar">
+<div class="mb-10 text-right">
+<h1 class="font-headline-lg text-headline-lg text-on-surface mb-2">أدوات النظام</h1>
+<p class="font-body-md text-body-md text-text-secondary">قم بإدارة إعدادات الراوتر المتقدمة وصيانة النظام من مكان واحد.</p>
+</div>
+<!-- Tools Bento Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter">
+<!-- Tool 1: Admin Password -->
+<button class="tool-card group bg-background-card p-card-padding rounded-xl border border-border-subtle hover:border-primary-container transition-all duration-300 flex flex-col items-center text-center shadow-[0px_2px_8px_rgba(51,56,61,0.04)]">
+<div class="icon-container w-16 h-16 rounded-full bg-accent-devices/10 text-accent-devices flex items-center justify-center mb-4 transition-transform duration-300">
+<svg class="ms-ico text-[32px]" viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M220-80q-24.75 0-42.37-17.63Q160-115.25 160-140v-434q0-24.75 17.63-42.38Q195.25-634 220-634h70v-96q0-78.85 55.61-134.42Q401.21-920 480.11-920q78.89 0 134.39 55.58Q670-808.85 670-730v96h70q24.75 0 42.38 17.62Q800-598.75 800-574v434q0 24.75-17.62 42.37Q764.75-80 740-80H220Zm0-60h520v-434H220v434Zm314.5-162.03Q557-324.06 557-355q0-30-22.67-54.5t-54.5-24.5q-31.83 0-54.33 24.5t-22.5 55q0 30.5 22.67 52.5t54.5 22q31.83 0 54.33-22.03ZM350-634h260v-96q0-54.17-37.88-92.08-37.88-37.92-92-37.92T388-822.08q-38 37.91-38 92.08v96ZM220-140v-434 434Z"/></svg>
+</div>
+<h3 class="font-label-lg text-label-lg text-on-surface group-hover:text-primary transition-colors">كلمة مرور الإدارة</h3>
+<p class="font-body-md text-body-md text-text-secondary mt-2">تغيير رمز الدخول للوحة التحكم</p>
+</button>
+<!-- Tool 2: Monitor -->
+<button class="tool-card group bg-background-card p-card-padding rounded-xl border border-border-subtle hover:border-primary-container transition-all duration-300 flex flex-col items-center text-center shadow-[0px_2px_8px_rgba(51,56,61,0.04)]">
+<div class="icon-container w-16 h-16 rounded-full bg-accent-internet/10 text-accent-internet flex items-center justify-center mb-4 transition-transform duration-300">
+<svg class="ms-ico text-[32px]" viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M120-120v-76l60-60v136h-60Zm165 0v-236l60-60v296h-60Zm165 0v-296l60 61v235h-60Zm165 0v-235l60-60v295h-60Zm165 0v-396l60-60v456h-60ZM120-356v-85l280-278 160 160 280-281v85L560-474 400-634 120-356Z"/></svg>
+</div>
+<h3 class="font-label-lg text-label-lg text-on-surface group-hover:text-primary transition-colors">تشخيص الشبكة</h3>
+<p class="font-body-md text-body-md text-text-secondary mt-2">اختبر الوصول إلى أي عنوان داخل الشبكة أو على الإنترنت.</p>
+</button>
+<!-- Tool 3: Reboot Schedule -->
+<button class="tool-card group bg-background-card p-card-padding rounded-xl border border-border-subtle hover:border-primary-container transition-all duration-300 flex flex-col items-center text-center shadow-[0px_2px_8px_rgba(51,56,61,0.04)]">
+<div class="icon-container w-16 h-16 rounded-full bg-accent-wireless/10 text-accent-wireless flex items-center justify-center mb-4 transition-transform duration-300">
+<svg class="ms-ico text-[32px]" viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="m627-287 45-45-159-160v-201h-60v225l174 181ZM480-80q-82 0-155-31.5t-127.5-86Q143-252 111.5-325T80-480q0-82 31.5-155t86-127.5Q252-817 325-848.5T480-880q82 0 155 31.5t127.5 86Q817-708 848.5-635T880-480q0 82-31.5 155t-86 127.5Q708-143 635-111.5T480-80Zm0-400Zm0 340q140 0 240-100t100-240q0-140-100-240T480-820q-140 0-240 100T140-480q0 140 100 240t240 100Z"/></svg>
+</div>
+<h3 class="font-label-lg text-label-lg text-on-surface group-hover:text-primary transition-colors">جدولة إعادة التشغيل</h3>
+<p class="font-body-md text-body-md text-text-secondary mt-2">ضبط أوقات الصيانة الدورية الآلية</p>
+</button>
+<!-- Tool 4: Time Settings -->
+<button class="tool-card group bg-background-card p-card-padding rounded-xl border border-border-subtle hover:border-primary-container transition-all duration-300 flex flex-col items-center text-center shadow-[0px_2px_8px_rgba(51,56,61,0.04)]">
+<div class="icon-container w-16 h-16 rounded-full bg-accent-lan/10 text-accent-lan flex items-center justify-center mb-4 transition-transform duration-300">
+<svg class="ms-ico text-[32px]" viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M483-120q-75 0-141-28.5T226.5-226q-49.5-49-78-115T120-482q0-75 28.5-140t78-113.5Q276-784 342-812t141-28q80 0 151.5 35T758-709v-106h60v208H609v-60h105q-44-51-103.5-82T483-780q-125 0-214 85.5T180-485q0 127 88 216t215 89q125 0 211-88t86-213h60q0 150-104 255.5T483-120Zm122-197L451-469v-214h60v189l137 134-43 43Z"/></svg>
+</div>
+<h3 class="font-label-lg text-label-lg text-on-surface group-hover:text-primary transition-colors">إعداد الوقت</h3>
+<p class="font-body-md text-body-md text-text-secondary mt-2">تزامن التوقيت والمنطقة الزمنية</p>
+</button>
+<!-- Tool 5: Restore -->
+<button class="tool-card group bg-background-card p-card-padding rounded-xl border border-border-subtle hover:border-primary-container transition-all duration-300 flex flex-col items-center text-center shadow-[0px_2px_8px_rgba(51,56,61,0.04)]">
+<div class="icon-container w-16 h-16 rounded-full bg-error-container/20 text-error flex items-center justify-center mb-4 transition-transform duration-300">
+<svg class="ms-ico text-[32px]" viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M451-122q-123-10-207-101t-84-216q0-77 35.5-145T295-695l43 43q-56 33-87 90.5T220-439q0 100 66 173t165 84v60Zm60 0v-60q100-12 165-84.5T741-439q0-109-75.5-184.5T481-699h-20l60 60-43 43-133-133 133-133 43 43-60 60h20q134 0 227 93.5T801-439q0 125-83.5 216T511-122Z"/></svg>
+</div>
+<h3 class="font-label-lg text-label-lg text-on-surface group-hover:text-primary transition-colors">إعادة ضبط المصنع</h3>
+<p class="font-body-md text-body-md text-text-secondary mt-2">حذف كل الإعدادات والعودة لإعدادات الفريموير.</p>
+</button>
+<!-- Tool 8: System Log -->
+<button class="tool-card group bg-background-card p-card-padding rounded-xl border border-border-subtle hover:border-primary-container transition-all duration-300 flex flex-col items-center text-center shadow-[0px_2px_8px_rgba(51,56,61,0.04)]">
+<div class="icon-container w-16 h-16 rounded-full bg-outline-variant/30 text-on-surface-variant flex items-center justify-center mb-4 transition-transform duration-300">
+<svg class="ms-ico text-[32px]" viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M222-80q-43.75 0-74.37-30.63Q117-141.25 117-185v-125h127v-570l59.8 60 59.8-60 59.8 60 59.8-60 59.8 60 60-60 60 60 60-60 60 60 60-60v695q0 43.75-30.62 74.37Q781.75-80 738-80H222Zm516-60q20 0 32.5-12.5T783-185v-595H304v470h389v125q0 20 12.5 32.5T738-140ZM357-622v-60h240v60H357Zm0 134v-60h240v60H357Zm333-134q-12 0-21-9t-9-21q0-12 9-21t21-9q12 0 21 9t9 21q0 12-9 21t-21 9Zm0 129q-12 0-21-9t-9-21q0-12 9-21t21-9q12 0 21 9t9 21q0 12-9 21t-21 9ZM221-140h412v-110H177v65q0 20 12.65 32.5T221-140Zm-44 0v-110 110Z"/></svg>
+</div>
+<h3 class="font-label-lg text-label-lg text-on-surface group-hover:text-primary transition-colors">سجل النظام</h3>
+<p class="font-body-md text-body-md text-text-secondary mt-2">مراجعة أحداث النظام والتحذيرات</p>
+</button>
+</div>
+<!-- Informational Footer Banner -->
+<div class="mt-12 bg-white/50 border-2 border-dashed border-border-subtle rounded-xl p-8 flex flex-col md:flex-row-reverse items-center justify-between gap-6">
+<div class="flex-1 text-right">
+<h4 class="font-headline-md text-headline-md text-on-surface mb-2">هل تحتاج للمساعدة؟</h4>
+<p class="font-body-md text-body-md text-text-secondary">الأدوات أعلاه هي إعدادات حساسة قد تؤثر على اتصالك بالإنترنت. يرجى مراجعة دليل المستخدم قبل إجراء تغييرات جوهرية.</p>
+</div>
+<div class="flex-shrink-0">
+<img class="w-48 h-48 object-contain" data-alt="A professional 3D isometric illustration of a stylized internet router with glowing blue data streams, placed in a minimalist corporate tech office environment with soft diffuse lighting. The style is clean, modern, and high-tech, using the primary blue and white brand colors to create a sense of reliability and advanced technology." src="../../luci-app-smartlink/htdocs/luci-static/resources/smartlink-app/img/img_06.png"/>
+</div>
+</div>
+</div>
+	</div>
+</div>
+
+<footer class="sl-footer">
+	<div class="sl-footer-inner">
+		<ul class="breadcrumb" id="modemenu" style="display:flex">
+			<li class="active"><a href="../index-luci.html">صفحات LuCI الأصلية</a></li>
+		</ul>
+		<span class="sl-footer-meta">
+			<a href="#">LuCI</a><span class="sl-sep">/</span><a href="#">OpenWrt 24.10</a>
+		</span>
+		<span class="sl-footer-brand">
+			<span class="sl-footer-badge">S</span><span>Alagha Technology</span>
+		</span>
+	</div>
+</footer>
+
+<script>
+(function () {
+	var root = document.documentElement,
+	    topmenu = document.getElementById('topmenu');
+
+	try {
+		var pref = localStorage.getItem('smartlink.theme');
+		if (pref) {
+			root.setAttribute('data-darkmode', pref === 'dark' ? 'true' : 'false');
+			root.setAttribute('data-theme-pref', pref);
+		}
+	} catch (e) {}
+
+	document.getElementById('sl-theme-toggle').addEventListener('click', function () {
+		var dark = root.getAttribute('data-darkmode') === 'true',
+		    next = dark ? 'light' : 'dark';
+		root.setAttribute('data-darkmode', dark ? 'false' : 'true');
+		root.setAttribute('data-theme-pref', next);
+		try { localStorage.setItem('smartlink.theme', next); } catch (e) {}
+	});
+
+	document.getElementById('sl-menu-toggle').addEventListener('click', function () {
+		topmenu.classList.toggle('sl-open');
+	});
+
+	topmenu.addEventListener('click', function (ev) {
+		var link = ev.target.closest('li.dropdown > a.menu');
+		if (!link) return;
+		ev.preventDefault();
+		var li = link.parentNode, was = li.classList.contains('sl-open');
+		topmenu.querySelectorAll('li.sl-open').forEach(function (n) { n.classList.remove('sl-open'); });
+		if (!was) li.classList.add('sl-open');
+	});
+
+	document.addEventListener('click', function (ev) {
+		if (!ev.target.closest('#topmenu'))
+			topmenu.querySelectorAll('li.sl-open').forEach(function (n) { n.classList.remove('sl-open'); });
+	});
+})();
+</script>
+</body>
+</html>

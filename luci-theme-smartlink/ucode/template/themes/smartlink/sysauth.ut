@@ -1,0 +1,77 @@
+{#
+ SMARTLink theme for LuCI
+ Copyright 2026 Alagha Technology
+ Structure derived from luci-theme-bootstrap
+ Copyright 2022 Jo-Philipp Wich <jo@mein.io>
+ Licensed to the public under the Apache License 2.0.
+-#}
+
+{% include('header', { blank_page: true }) %}
+
+<div class="sl-login-page" dir="rtl" lang="ar">
+	<div class="sl-login-card">
+		<div class="sl-login-head">
+			<svg class="sl-login-logo" viewBox="0 0 48 48" aria-hidden="true">
+				<defs>
+					<linearGradient id="slMark" x1="0" y1="0" x2="0" y2="1">
+						<stop offset="0%" stop-color="#5ecbfa"/>
+						<stop offset="100%" stop-color="#1b82c4"/>
+					</linearGradient>
+					<linearGradient id="slGloss" x1="0" y1="0" x2="0" y2="1">
+						<stop offset="0%" stop-color="#ffffff" stop-opacity=".28"/>
+						<stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+					</linearGradient>
+				</defs>
+				<rect x="3" y="3" width="42" height="42" rx="13" fill="url(#slMark)"/>
+				<path d="M3 16a13 13 0 0 1 13-13h16a13 13 0 0 1 13 13v2H3Z" fill="url(#slGloss)"/>
+				<g fill="none" stroke="#ffffff" stroke-linecap="round">
+					<path d="M11.8 25.6a13 13 0 0 1 24.4 0" stroke-width="3.1" stroke-opacity=".95"/>
+					<path d="M16 27.1a8.5 8.5 0 0 1 16 0" stroke-width="3.1" stroke-opacity=".8"/>
+				</g>
+				<circle cx="24" cy="33" r="3.4" fill="#ffffff"/>
+			</svg>
+			<h1>SMARTLink</h1>
+			<p>الرجاء إدخال اسم المستخدم وكلمة المرور.</p>
+		</div>
+
+		<section hidden>
+			<form method="post" class="cbi-map">
+				<div class="cbi-section">
+					<div class="cbi-section-node">
+						<div class="cbi-value">
+							<label class="cbi-value-title" for="luci_username">اسم المستخدم</label>
+							<div class="cbi-value-field">
+								<input name="luci_username" id="luci_username" type="text" autocomplete="username" value="{{ entityencode(duser, true) }}">
+							</div>
+						</div>
+						<div class="cbi-value">
+							<label class="cbi-value-title" for="luci_password">كلمة المرور</label>
+							<div class="cbi-value-field">
+								<input name="luci_password" id="luci_password" type="password" autocomplete="current-password">
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+
+			{% if (fuser): %}
+			<div class="alert-message error">
+				اسم المستخدم أو كلمة المرور غير صحيحة. حاول مرة أخرى.
+			</div>
+			{% endif %}
+
+			<button class="btn cbi-button-positive important">تسجيل الدخول</button>
+		</section>
+
+		<div id="view">
+			<div class="spinning">جارٍ التحميل…</div>
+			<script type="text/javascript">
+				L.require('ui').then(function(ui) {
+					ui.instantiateView('smartlink.sysauth');
+				});
+			</script>
+		</div>
+	</div>
+</div>
+
+{% include('footer', { blank_page: true }) %}

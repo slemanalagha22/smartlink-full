@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-darkmode="false">
+<head>
+<meta charset="utf-8">
+<title>SMARTLink — معاينة المكوّنات الجديدة</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="../luci-theme-smartlink/htdocs/luci-static/smartlink/cascade.css">
+<style>
+  .harness-bar { position: sticky; top: 0; z-index: 60; display: flex; gap: 10px; align-items: center;
+                 padding: 10px 16px; background: var(--sl-card); border-bottom: 1px solid var(--sl-border); }
+  .harness-bar h1 { font-size: 14px; margin: 0; font-weight: 700; }
+  .harness-section { padding: 24px; max-width: 1440px; margin-inline: auto; }
+  .harness-section > h2 { font-size: 13px; letter-spacing: .06em; text-transform: uppercase;
+                          color: var(--sl-ink-subtle); margin: 0 0 12px; }
+  .login-frame { block-size: 620px; border: 1px solid var(--sl-border); border-radius: 12px; overflow: hidden; }
+  .login-frame iframe { inline-size: 100%; block-size: 100%; border: 0; }
+</style>
+</head>
+<body>
+
+<div class="harness-bar">
+  <h1>معاينة المكوّنات</h1>
+  <button class="btn cbi-button-action" id="toggle">تبديل الوضع الداكن</button>
+</div>
+
+<div class="harness-section">
+  <h2>Ports</h2>
+  <div class="sl-card">
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-block-end:16px;flex-wrap:wrap">
+      <div>
+        <h2 style="margin:0">المنافذ</h2>
+        <p style="margin:4px 0 0;color:var(--sl-ink-subtle)">حالة منافذ الشبكة على الجهاز.</p>
+      </div>
+      <span class="sl-chip sl-accent-lan">3 من 5 متصل</span>
+    </div>
+    <div class="sl-ports" id="ports"></div>
+  </div>
+</div>
+
+<div class="harness-section">
+  <h2>Operation modes</h2>
+  <div class="sl-grid" id="modes"></div>
+</div>
+
+<div class="harness-section">
+  <h2>Scan results</h2>
+  <div class="sl-card"><div class="sl-scan" id="scan"></div></div>
+</div>
+
+<div class="harness-section">
+  <h2>Login page</h2>
+  <div class="login-frame"><iframe src="login.html" title="login preview"></iframe></div>
+</div>
+
+<script>
+var ICONS = {
+  port: 'M160-160q-33 0-56.5-23.5T80-240v-240q0-33 23.5-56.5T160-560h80v-120q0-33 23.5-56.5T320-760h320q33 0 56.5 23.5T720-680v120h80q33 0 56.5 23.5T880-480v240q0 33-23.5 56.5T800-160H160Zm140-400h360v-120H300v120Zm-140 80v240h640v-240H160Zm120 160h80v-80h-80v80Zm140 0h80v-80h-80v80Zm140 0h80v-80h-80v80Z',
+  router: 'M180-120q-24 0-42-18t-18-42v-204q0-24 18-42t42-18h436v-176h60v176h104q24 0 42 18t18 42v204q0 24-18 42t-42 18H180Zm132-132q12-12 12-30t-12-30q-12-12-30-12t-30 12q-12 12-12 30t12 30q12 12 30 12t30-12Zm148 0q12-12 12-30t-12-30q-12-12-30-12t-30 12q-12 12-12 30t12 30q12 12 30 12t30-12Zm148 0q12-12 12-30t-12-30q-12-12-30-12t-30 12q-12 12-12 30t12 30q12 12 30 12t30-12ZM566-667l-41-41q24-24 54-38t67-14q36 0 66 14t54 38l-41 41q-14-14-35-23.5t-44-9.5q-23 0-45 9.5T566-667Zm-85-85-44-44q33-33 88-58.5T646-880q66 0 121 25.5t88 58.5l-44 44q-26-29-68.5-48.5T646-820q-54 0-96.5 19.5T481-752Z',
+  bridge: 'M120-160v-80h180v-200q0-83 58.5-141.5T500-640h60v-160h280v240H560v-40h-60q-50 0-85 35t-35 85v200h180v80H120Z',
+  internet: 'M480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-62q26-36 45-75t31-83H404q12 44 31 83t45 75Zm-78-12q-18-33-31.5-68.5T348-300H204q35 61 88 100t110 54Zm156 0q57-15 110-54t88-100H612q-9 42-22.5 77.5T558-154ZM178-360h158q-3-20-4.5-39.5T330-440q0-21 1.5-40.5T336-520H178q-5 20-7.5 39.5T168-440q0 21 2.5 40.5T178-360Zm220 0h164q3-20 4.5-39.5T568-440q0-21-1.5-40.5T562-520H398q-3 20-4.5 39.5T392-440q0 21 1.5 40.5T398-360Zm226 0h158q5-20 7.5-39.5T792-440q0-21-2.5-40.5T782-520H624q3 20 4.5 39.5T630-440q0 21-1.5 40.5T624-360Zm-12-220h144q-35-61-88-100t-110-54q18 33 31.5 68.5T612-580Zm-208 0h152q-12-44-31-83t-45-75q-26 36-45 75t-31 83Zm-200 0h144q9-42 22.5-77.5T402-806q-57 15-110 54t-88 100Z',
+  repeater: 'M480-80q-17 0-28.5-11.5T440-120v-320q0-17 11.5-28.5T480-480q17 0 28.5 11.5T520-440v320q0 17-11.5 28.5T480-80ZM254-546l-84-86q59-59 138-93.5T480-760q93 0 172 35t138 94l-84 85q-44-44-102-69.5T480-641q-66 0-124 25.5T254-546ZM84-716 0-802q92-94 215-146t265-52q142 0 265 52t215 146l-84 86q-77-77-178-120.5T480-880q-117 0-218 43.5T84-716Zm396 396q-33 0-56.5-23.5T400-400q0-33 23.5-56.5T480-480q33 0 56.5 23.5T560-400q0 33-23.5 56.5T480-320Z'
+};
+
+function icon(name) {
+  return '<svg viewBox="0 -960 960 960" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="' + ICONS[name] + '"/></svg>';
+}
+
+var PORTS = [
+  { role: 'wan', index: 0, up: true,  speed: 1000 },
+  { role: 'lan', index: 1, up: true,  speed: 1000 },
+  { role: 'lan', index: 2, up: true,  speed: 100 },
+  { role: 'lan', index: 3, up: false, speed: null },
+  { role: 'lan', index: 4, up: false, speed: null }
+];
+
+document.getElementById('ports').innerHTML = PORTS.map(function (p) {
+  var label = p.role === 'wan' ? 'WAN' : 'LAN ' + p.index;
+  return '<div class="sl-port ' + (p.up ? 'is-up' : 'is-down') + (p.role === 'wan' ? ' is-wan' : '') + '">' +
+    '<div class="sl-port-jack">' + icon('port') + '</div>' +
+    '<div class="sl-port-name">' + label + '</div>' +
+    '<div class="sl-port-speed">' + (p.up ? (p.speed ? p.speed + 'M' : 'متصل') : 'فارغ') + '</div>' +
+    '</div>';
+}).join('');
+
+var MODES = [
+  { icon: 'router',   accent: 'primary',  title: 'راوتر', current: true,
+    desc: 'الوضع الافتراضي: الجهاز يوزّع الإنترنت من منفذ WAN وينشئ شبكته الخاصة.' },
+  { icon: 'bridge',   accent: 'lan',      title: 'نقطة وصول / جسر',
+    desc: 'يمرّر الشبكة من راوتر آخر ويعمل كموسّع سلكي. يُطفأ خادم DHCP ويُضم منفذ WAN إلى الشبكة المحلية.' },
+  { icon: 'internet', accent: 'internet', title: 'WISP',
+    desc: 'يتصل بشبكة لاسلكية أخرى كمصدر للإنترنت، ويبقى راوتراً كامل الوظائف خلفها.' },
+  { icon: 'repeater', accent: 'wireless', title: 'مقوي إشارة', unavailable: true,
+    desc: 'يمدّد شبكة لاسلكية قائمة بنفس اسمها ونطاق عناوينها.' }
+];
+
+document.getElementById('modes').innerHTML = MODES.map(function (m) {
+  return '<button type="button" class="sl-mode sl-accent-' + m.accent +
+    (m.current ? ' is-current' : '') + (m.unavailable ? ' is-unavailable' : '') + '">' +
+    (m.current ? '<span class="sl-mode-tag">الوضع الحالي</span>' : '') +
+    '<div class="sl-mode-icon">' + icon(m.icon) + '</div>' +
+    '<div class="sl-mode-title">' + m.title + '</div>' +
+    '<div class="sl-mode-desc">' + m.desc + '</div>' +
+    (m.unavailable ? '<div class="sl-field-error">يحتاج حزمة relayd غير المثبّتة.</div>' : '') +
+    '</button>';
+}).join('');
+
+var SCAN = [
+  { ssid: 'Alagha-Home', ch: 6,  enc: 'PSK2', pct: 86, dbm: -46, sel: true },
+  { ssid: 'Neighbour-5G', ch: 36, enc: 'SAE-MIXED', pct: 61, dbm: -62 },
+  { ssid: 'CafeNet', ch: 11, enc: 'مفتوحة', pct: 34, dbm: -74 }
+];
+
+document.getElementById('scan').innerHTML = SCAN.map(function (a) {
+  return '<button type="button" class="sl-scan-row' + (a.sel ? ' is-selected' : '') + '">' +
+    '<div><div class="sl-scan-name">' + a.ssid + '</div>' +
+    '<div class="sl-scan-meta">قناة ' + a.ch + ' · ' + a.enc + '</div></div>' +
+    '<div class="sl-scan-signal"><div>' + a.pct + '%</div>' +
+    '<div class="sl-scan-meta">' + a.dbm + ' dBm</div></div></button>';
+}).join('');
+
+document.getElementById('toggle').addEventListener('click', function () {
+  var root = document.documentElement,
+      dark = root.getAttribute('data-darkmode') === 'true';
+  root.setAttribute('data-darkmode', dark ? 'false' : 'true');
+  var f = document.querySelector('iframe');
+  if (f && f.contentDocument)
+    f.contentDocument.documentElement.setAttribute('data-darkmode', dark ? 'false' : 'true');
+});
+</script>
+</body>
+</html>

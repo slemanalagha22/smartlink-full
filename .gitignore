@@ -1,0 +1,7 @@
+# Build output. The installable copies are committed under packages/.
+dist/
+
+# Editor and session state.
+.claude/
+__pycache__/
+*.pyc

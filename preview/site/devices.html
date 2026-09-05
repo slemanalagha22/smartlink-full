@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-darkmode="false" data-theme-pref="light">
+<head>
+<meta charset="utf-8">
+<title>SMARTLink — الأجهزة المتصلة</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="../../luci-theme-smartlink/htdocs/luci-static/smartlink/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../luci-theme-smartlink/htdocs/luci-static/smartlink/cascade.css">
+<link rel="stylesheet" href="../../luci-app-smartlink/htdocs/luci-static/resources/smartlink-app/fonts.css">
+<link rel="stylesheet" href="../../luci-app-smartlink/htdocs/luci-static/resources/smartlink-app/app.css">
+<link rel="stylesheet" href="../../luci-app-smartlink/htdocs/luci-static/resources/smartlink-app/pages.css">
+</head>
+<body class="lang_ar" data-page="devices">
+
+<header class="sl-header">
+	<div class="sl-header-inner">
+		<a class="brand" href="dashboard.html"><svg class="sl-logo" viewBox="0 0 32 32" aria-hidden="true"><rect x="1" y="1" width="30" height="30" rx="8" fill="currentColor" opacity=".16"/><path fill="currentColor" d="M20.8 10.4a6.6 6.6 0 0 0-4.9-2 6.6 6.6 0 0 0-4.7 1.9c-.6.6-.6 1.5 0 2.1.6.6 1.5.6 2.1 0a3.7 3.7 0 0 1 2.6-1c1 0 1.9.4 2.7 1.1.6.6 1.5.5 2.1-.1.6-.6.6-1.4.1-2Zm3.4-3.5A11.4 11.4 0 0 0 16 3.6c-3 0-5.9 1.2-8.1 3.3-.6.6-.6 1.5 0 2.1.6.6 1.5.6 2.1 0A8.4 8.4 0 0 1 16 6.6c2.2 0 4.3.8 5.9 2.3.6.6 1.6.6 2.2 0 .6-.6.6-1.5.1-2Zm-8.2 8.7a3.6 3.6 0 0 0-3.6 3.6c0 .9.3 1.7.9 2.4l2.7 3.2 2.7-3.2c.6-.7.9-1.5.9-2.4a3.6 3.6 0 0 0-3.6-3.6Z"/></svg><span>SMARTLink</span></a>
+		<ul class="nav" id="topmenu"><li class=""><a href="dashboard.html">الرئيسية</a></li><li class="dropdown active"><a class="menu" href="#">الشبكة</a><ul class="dropdown-menu"><li class=""><a href="network.html">نظرة عامة</a></li><li class="active"><a href="devices.html">الأجهزة المتصلة</a></li><li class=""><a href="wireless.html">الشبكة اللاسلكية</a></li><li class=""><a href="lan.html">الشبكة المحلية</a></li><li class=""><a href="internet.html">الإنترنت</a></li></ul></li><li class=""><a href="application.html">التطبيق</a></li><li class=""><a href="tools.html">الأدوات</a></li><li class="dropdown "><a class="menu" href="#">الإعداد</a><ul class="dropdown-menu"><li class=""><a href="welcome.html">مرحباً</a></li><li class=""><a href="setup1.html">الخطوة 1</a></li><li class=""><a href="setup2.html">الخطوة 2</a></li><li class=""><a href="setupdone.html">اكتمل الإعداد</a></li></ul></li></ul>
+		<div class="sl-header-actions">
+			<div id="indicators"><span class="label">معاينة</span></div>
+			<button type="button" class="sl-icon-btn sl-theme-toggle" id="sl-theme-toggle"
+			        title="تبديل النمط"><svg class="sl-ico sl-ico-sun" viewBox="0 -960 960 960"><path d="M480-360q50 0 85-35t35-85q0-50-35-85t-85-35q-50 0-85 35t-35 85q0 50 35 85t85 35Zm0 60q-75 0-127.5-52.5T300-480q0-75 52.5-127.5T480-660q75 0 127.5 52.5T660-480q0 75-52.5 127.5T480-300ZM200-450H40v-60h160v60Zm720 0H760v-60h160v60ZM450-760v-160h60v160h-60Zm0 720v-160h60v160h-60ZM260-655l-101-97 43-44 96 100-38 41Zm441 442-97-101 41-39 99 97-43 43Zm-97-442 97-101 43 41-100 99-40-39ZM254-212l-42-44 98-96 22 19 20 21-98 100Z"/></svg><svg class="sl-ico sl-ico-moon" viewBox="0 -960 960 960"><path d="M480-120q-150 0-255-105T120-480q0-150 105-255t255-105q8 0 17 .5t23 1.5q-36 32-56 79t-20 99q0 90 63 153t153 63q52 0 99-18.5t79-51.5q1 12 1.5 19.5t.5 14.5q0 150-105 255T480-120Zm0-60q109 0 190-67.5T769-406q-25 11-53.5 16.5T660-384q-115 0-195.5-80.5T384-660q0-24 5-51.5t18-62.5q-98 27-162.5 109.5T180-480q0 125 87.5 212.5T480-180Z"/></svg></button>
+			<button type="button" class="sl-icon-btn sl-menu-toggle" id="sl-menu-toggle"
+			        title="القائمة"><svg class="sl-ico" viewBox="0 -960 960 960"><path d="M120-240v-60h720v60H120Zm0-210v-60h720v60H120Zm0-210v-60h720v60H120Z"/></svg></button>
+		</div>
+	</div>
+</header>
+
+<div id="maincontent" class="container">
+	<div id="view">
+		<div class="smartlink-page" data-sl-page="devices" dir="rtl" lang="ar">
+<!-- Dashboard Header Section -->
+<div class="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<h1 class="font-headline-lg text-headline-lg mb-2">إدارة الأجهزة المتصلة</h1>
+<p class="text-text-secondary font-body-md text-body-md">راقب وتحكم في كافة الأجهزة المرتبطة بشبكة SMARTLink الخاصة بك.</p>
+</div>
+<!-- Contextual Filter/Tabs -->
+<div class="flex bg-surface-container rounded-lg p-1">
+<button class="px-6 py-2 rounded-md font-label-lg text-label-lg transition-all bg-white text-primary shadow-sm" id="tab-connected">
+                    قائمة العملاء المتصلين
+                </button>
+<button class="px-6 py-2 rounded-md font-label-lg text-label-lg transition-all text-text-secondary hover:text-on-surface" id="tab-blacklist">
+                    القائمة السوداء
+                </button>
+</div>
+</div>
+<!-- Connectivity Stats (Atmospheric Layout) -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter mb-8">
+<div class="bg-background-card p-card-padding rounded-xl border border-border-subtle flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-accent-devices/10 flex items-center justify-center text-accent-devices">
+<svg class="ms-ico" viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M501-540ZM80-160v-60h421v60H80Zm100-120q-24 0-42-18t-18-42v-400q0-24 18-42t42-18h600q24 0 42 18t18 42H180v400h321v60H180Zm640 60v-400H621v400h199Zm-214 60q-18 0-31.5-13.5T561-205v-430q0-18 13.5-31.5T606-680h229q18 0 31.5 13.5T880-635v430q0 18-13.5 31.5T835-160H606Zm115-360q12 0 21-9t9-21q0-12-9-21t-21.48-9Q709-580 700-571t-9 21.48q0 11.52 9 20.52t21 9Zm0 100Z"/></svg>
+</div>
+<div>
+<div class="text-text-secondary font-label-sm text-label-sm">إجمالي الأجهزة</div>
+<div class="font-headline-md text-headline-md">12</div>
+</div>
+</div>
+<div class="bg-background-card p-card-padding rounded-xl border border-border-subtle flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-accent-wireless/10 flex items-center justify-center text-accent-wireless">
+<svg class="ms-ico" viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M417-154q-27-27-27-63t27-63q27-27 63-27t63 27q27 27 27 63t-27 63q-27 27-63 27t-63-27ZM232-357l-63-63q70-70 146.5-105T480-560q88 0 164.5 35T791-420l-63 63q-61-61-123-87t-125-26q-63 0-125 26t-123 87ZM63-526 0-589q93-95 216.5-153T480-800q140 0 263.5 58T960-589l-63 63q-88-84-192.5-134T480-710q-120 0-224.5 50T63-526Z"/></svg>
+</div>
+<div>
+<div class="text-text-secondary font-label-sm text-label-sm">اتصال لاسلكي</div>
+<div class="font-headline-md text-headline-md">8</div>
+</div>
+</div>
+<div class="bg-background-card p-card-padding rounded-xl border border-border-subtle flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-accent-lan/10 flex items-center justify-center text-accent-lan">
+<svg class="ms-ico" viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="m680-240-42-42 196-198-196-198 42-42 240 240-240 240Zm-400 0L40-480l240-240 42 42-196 198 196 198-42 42Zm15.5-215.5Q285-466 285-480t10.5-24.5Q306-515 320-515t24.5 10.5Q355-494 355-480t-10.5 24.5Q334-445 320-445t-24.5-10.5Zm160 0Q445-466 445-480t10.5-24.5Q466-515 480-515t24.5 10.5Q515-494 515-480t-10.5 24.5Q494-445 480-445t-24.5-10.5Zm160 0Q605-466 605-480t10.5-24.5Q626-515 640-515t24.5 10.5Q675-494 675-480t-10.5 24.5Q654-445 640-445t-24.5-10.5Z"/></svg>
+</div>
+<div>
+<div class="text-text-secondary font-label-sm text-label-sm">اتصال سلكي</div>
+<div class="font-headline-md text-headline-md">4</div>
+</div>
+</div>
+<div class="bg-background-card p-card-padding rounded-xl border border-border-subtle flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-accent-internet/10 flex items-center justify-center text-accent-internet">
+<svg class="ms-ico" viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M473.5-303.5Q517-305 537-336l216-339-335 219q-30 20-32 64t21 67q23 23 66.5 21.5ZM478-799q57 0 119 18.5T716-717l-52 37q-45-30-96.5-44.5T477.98-739q-140.47 0-239.23 100.22Q140-538.57 140-396.02 140-351 152.5-305q12.5 46 35.5 85h579q22-36 35-84t13-94q0-42-12.5-90.5T758-578l39-52q38 56 57 112.5T875-404q2 60-12 113t-41 98q-12 23-25.5 28t-33.5 5H192q-17 0-33.5-8.5T134-193q-26-48-40-97.5T80-396q0-83 31.5-156.5t85.5-128Q251-735 323.68-767T478-799Zm-9 331Z"/></svg>
+</div>
+<div>
+<div class="text-text-secondary font-label-sm text-label-sm">عرض النطاق الحالي</div>
+<div class="font-headline-md text-headline-md">4.2 Mb/s</div>
+</div>
+</div>
+</div>
+<!-- Devices Table Container -->
+<div class="bg-background-card rounded-xl border border-border-subtle overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full text-right border-collapse">
+<thead>
+<tr class="bg-surface-container-low border-b border-border-subtle">
+<th class="px-6 py-4 font-label-lg text-label-lg text-on-surface">الجهاز</th>
+<th class="px-6 py-4 font-label-lg text-label-lg text-on-surface">عنوان IP</th>
+<th class="px-6 py-4 font-label-lg text-label-lg text-on-surface">عنوان MAC</th>
+<th class="px-6 py-4 font-label-lg text-label-lg text-on-surface">نوع الاتصال</th>
+<th class="px-6 py-4 font-label-lg text-label-lg text-on-surface text-center">الإجراءات</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-subtle">
+<!-- Row 1 -->
+<tr class="device-row transition-colors">
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-text-secondary">
+<svg class="ms-ico" viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M57-160q-23.51 0-40.26-17.63Q0-195.25 0-220h141q-24 0-42-18t-18-42v-500q0-24 18-42t42-18h678q24 0 42 18t18 42v500q0 24-18 42t-42 18h141q0 25-17.62 42.5Q924.75-160 900-160H57Zm447-32q10-10 10-24t-10-24q-10-10-24-10t-24 10q-10 10-10 24t10 24q10 10 24 10t24-10Zm-363-88h678v-500H141v500Zm0 0v-500 500Z"/></svg>
+</div>
+<div>
+<div class="font-label-lg text-label-lg">MacBook Pro (Ali)</div>
+<div class="text-text-secondary font-label-sm text-label-sm">آبل - نشط حالياً</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-5 font-body-md text-body-md text-on-surface-variant">192.168.1.102</td>
+<td class="px-6 py-5 font-body-md text-body-md text-on-surface-variant">F0:18:98:C3:44:A2</td>
+<td class="px-6 py-5">
+<span class="px-3 py-1 bg-accent-wireless/10 text-accent-wireless rounded-full font-label-sm text-label-sm">Wi-Fi 5GHz</span>
+</td>
+<td class="px-6 py-5">
+<div class="flex items-center justify-center gap-2">
+<button class="px-4 py-2 bg-primary-container text-on-primary rounded-lg font-label-sm text-label-sm hover:opacity-90 transition-all active:scale-95 flex items-center gap-2">
+<svg class="ms-ico text-[18px]" viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M473.5-303.5Q517-305 537-336l216-339-335 219q-30 20-32 64t21 67q23 23 66.5 21.5ZM478-799q57 0 119 18.5T716-717l-52 37q-45-30-96.5-44.5T477.98-739q-140.47 0-239.23 100.22Q140-538.57 140-396.02 140-351 152.5-305q12.5 46 35.5 85h579q22-36 35-84t13-94q0-42-12.5-90.5T758-578l39-52q38 56 57 112.5T875-404q2 60-12 113t-41 98q-12 23-25.5 28t-33.5 5H192q-17 0-33.5-8.5T134-193q-26-48-40-97.5T80-396q0-83 31.5-156.5t85.5-128Q251-735 323.68-767T478-799Zm-9 331Z"/></svg>
+                                        تحديد السرعة
+                                    </button>
+<button class="px-4 py-2 border border-error text-error rounded-lg font-label-sm text-label-sm hover:bg-error/5 transition-all active:scale-95 flex items-center gap-2">
+<svg class="ms-ico text-[18px]" viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M324-111.5Q251-143 197-197t-85.5-127Q80-397 80-480t31.5-156Q143-709 197-763t127-85.5Q397-880 480-880t156 31.5Q709-817 763-763t85.5 127Q880-563 880-480t-31.5 156Q817-251 763-197t-127 85.5Q563-80 480-80t-156-31.5ZM480-140q61.01 0 117.51-20.5Q654-181 699-220L220-699q-38 46-59 102.17T140-480q0 142.37 98.81 241.19Q337.63-140 480-140Zm259-121q37-45 59-101.49 22-56.5 22-117.51 0-142.38-98.81-241.19T480-820q-60.66 0-116.83 21T261-739l478 478ZM480-480Z"/></svg>
+                                        القائمة السوداء
+                                    </button>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="device-row transition-colors">
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-text-secondary">
+<svg class="ms-ico" viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M501-540ZM80-160v-60h421v60H80Zm100-120q-24 0-42-18t-18-42v-400q0-24 18-42t42-18h600q24 0 42 18t18 42H180v400h321v60H180Zm640 60v-400H621v400h199Zm-214 60q-18 0-31.5-13.5T561-205v-430q0-18 13.5-31.5T606-680h229q18 0 31.5 13.5T880-635v430q0 18-13.5 31.5T835-160H606Zm115-360q12 0 21-9t9-21q0-12-9-21t-21.48-9Q709-580 700-571t-9 21.48q0 11.52 9 20.52t21 9Zm0 100Z"/></svg>
+</div>
+<div>
+<div class="font-label-lg text-label-lg">Samsung S21</div>
+<div class="text-text-secondary font-label-sm text-label-sm">سامسونج - نشط حالياً</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-5 font-body-md text-body-md text-on-surface-variant">192.168.1.105</td>
+<td class="px-6 py-5 font-body-md text-body-md text-on-surface-variant">88:32:9B:D1:F2:09</td>
+<td class="px-6 py-5">
+<span class="px-3 py-1 bg-accent-wireless/10 text-accent-wireless rounded-full font-label-sm text-label-sm">Wi-Fi 2.4GHz</span>
+</td>
+<td class="px-6 py-5">
+<div class="flex items-center justify-center gap-2">
+<button class="px-4 py-2 bg-primary-container text-on-primary rounded-lg font-label-sm text-label-sm hover:opacity-90 transition-all active:scale-95 flex items-center gap-2">
+<svg class="ms-ico text-[18px]" viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M473.5-303.5Q517-305 537-336l216-339-335 219q-30 20-32 64t21 67q23 23 66.5 21.5ZM478-799q57 0 119 18.5T716-717l-52 37q-45-30-96.5-44.5T477.98-739q-140.47 0-239.23 100.22Q140-538.57 140-396.02 140-351 152.5-305q12.5 46 35.5 85h579q22-36 35-84t13-94q0-42-12.5-90.5T758-578l39-52q38 56 57 112.5T875-404q2 60-12 113t-41 98q-12 23-25.5 28t-33.5 5H192q-17 0-33.5-8.5T134-193q-26-48-40-97.5T80-396q0-83 31.5-156.5t85.5-128Q251-735 323.68-767T478-799Zm-9 331Z"/></svg>
+                                        تحديد السرعة
+                                    </button>
+<button class="px-4 py-2 border border-error text-error rounded-lg font-label-sm text-label-sm hover:bg-error/5 transition-all active:scale-95 flex items-center gap-2">
+<svg class="ms-ico text-[18px]" viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M324-111.5Q251-143 197-197t-85.5-127Q80-397 80-480t31.5-156Q143-709 197-763t127-85.5Q397-880 480-880t156 31.5Q709-817 763-763t85.5 127Q880-563 880-480t-31.5 156Q817-251 763-197t-127 85.5Q563-80 480-80t-156-31.5ZM480-140q61.01 0 117.51-20.5Q654-181 699-220L220-699q-38 46-59 102.17T140-480q0 142.37 98.81 241.19Q337.63-140 480-140Zm259-121q37-45 59-101.49 22-56.5 22-117.51 0-142.38-98.81-241.19T480-820q-60.66 0-116.83 21T261-739l478 478ZM480-480Z"/></svg>
+                                        القائمة السوداء
+                                    </button>
+</div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="device-row transition-colors">
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-text-secondary">
+<svg class="ms-ico" viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M334-120v-60h86v-100H140q-24 0-42-18t-18-42v-440q0-24 18-42t42-18h680q24 0 42 18t18 42v440q0 24-18 42t-42 18H540v100h86v60H334ZM140-340h680v-440H140v440Zm0 0v-440 440Z"/></svg>
+</div>
+<div>
+<div class="font-label-lg text-label-lg">Home PC - Office</div>
+<div class="text-text-secondary font-label-sm text-label-sm">مخصص - متصل بالكابل</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-5 font-body-md text-body-md text-on-surface-variant">192.168.1.101</td>
+<td class="px-6 py-5 font-body-md text-body-md text-on-surface-variant">00:1A:2B:3C:4D:5E</td>
+<td class="px-6 py-5">
+<span class="px-3 py-1 bg-accent-lan/10 text-accent-lan rounded-full font-label-sm text-label-sm">LAN (1Gbps)</span>
+</td>
+<td class="px-6 py-5">
+<div class="flex items-center justify-center gap-2">
+<button class="px-4 py-2 bg-primary-container text-on-primary rounded-lg font-label-sm text-label-sm hover:opacity-90 transition-all active:scale-95 flex items-center gap-2">
+<svg class="ms-ico text-[18px]" viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M473.5-303.5Q517-305 537-336l216-339-335 219q-30 20-32 64t21 67q23 23 66.5 21.5ZM478-799q57 0 119 18.5T716-717l-52 37q-45-30-96.5-44.5T477.98-739q-140.47 0-239.23 100.22Q140-538.57 140-396.02 140-351 152.5-305q12.5 46 35.5 85h579q22-36 35-84t13-94q0-42-12.5-90.5T758-578l39-52q38 56 57 112.5T875-404q2 60-12 113t-41 98q-12 23-25.5 28t-33.5 5H192q-17 0-33.5-8.5T134-193q-26-48-40-97.5T80-396q0-83 31.5-156.5t85.5-128Q251-735 323.68-767T478-799Zm-9 331Z"/></svg>
+                                        تحديد السرعة
+                                    </button>
+<button class="px-4 py-2 border border-error text-error rounded-lg font-label-sm text-label-sm hover:bg-error/5 transition-all active:scale-95 flex items-center gap-2">
+<svg class="ms-ico text-[18px]" viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M324-111.5Q251-143 197-197t-85.5-127Q80-397 80-480t31.5-156Q143-709 197-763t127-85.5Q397-880 480-880t156 31.5Q709-817 763-763t85.5 127Q880-563 880-480t-31.5 156Q817-251 763-197t-127 85.5Q563-80 480-80t-156-31.5ZM480-140q61.01 0 117.51-20.5Q654-181 699-220L220-699q-38 46-59 102.17T140-480q0 142.37 98.81 241.19Q337.63-140 480-140Zm259-121q37-45 59-101.49 22-56.5 22-117.51 0-142.38-98.81-241.19T480-820q-60.66 0-116.83 21T261-739l478 478ZM480-480Z"/></svg>
+                                        القائمة السوداء
+                                    </button>
+</div>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="device-row transition-colors">
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-text-secondary">
+<svg class="ms-ico" viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M330-120v-80H140q-24 0-42-18t-18-42v-520q0-24 18-42t42-18h680q24 0 42 18t18 42v520q0 24-18 42t-42 18H630v80H330ZM140-260h680v-520H140v520Zm0 0v-520 520Z"/></svg>
+</div>
+<div>
+<div class="font-label-lg text-label-lg">LG Smart TV 4K</div>
+<div class="text-text-secondary font-label-sm text-label-sm">ال جي - غرفة المعيشة</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-5 font-body-md text-body-md text-on-surface-variant">192.168.1.112</td>
+<td class="px-6 py-5 font-body-md text-body-md text-on-surface-variant">C4:D9:87:65:E4:32</td>
+<td class="px-6 py-5">
+<span class="px-3 py-1 bg-accent-wireless/10 text-accent-wireless rounded-full font-label-sm text-label-sm">Wi-Fi 5GHz</span>
+</td>
+<td class="px-6 py-5">
+<div class="flex items-center justify-center gap-2">
+<button class="px-4 py-2 bg-primary-container text-on-primary rounded-lg font-label-sm text-label-sm hover:opacity-90 transition-all active:scale-95 flex items-center gap-2">
+<svg class="ms-ico text-[18px]" viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M473.5-303.5Q517-305 537-336l216-339-335 219q-30 20-32 64t21 67q23 23 66.5 21.5ZM478-799q57 0 119 18.5T716-717l-52 37q-45-30-96.5-44.5T477.98-739q-140.47 0-239.23 100.22Q140-538.57 140-396.02 140-351 152.5-305q12.5 46 35.5 85h579q22-36 35-84t13-94q0-42-12.5-90.5T758-578l39-52q38 56 57 112.5T875-404q2 60-12 113t-41 98q-12 23-25.5 28t-33.5 5H192q-17 0-33.5-8.5T134-193q-26-48-40-97.5T80-396q0-83 31.5-156.5t85.5-128Q251-735 323.68-767T478-799Zm-9 331Z"/></svg>
+                                        تحديد السرعة
+                                    </button>
+<button class="px-4 py-2 border border-error text-error rounded-lg font-label-sm text-label-sm hover:bg-error/5 transition-all active:scale-95 flex items-center gap-2">
+<svg class="ms-ico text-[18px]" viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M324-111.5Q251-143 197-197t-85.5-127Q80-397 80-480t31.5-156Q143-709 197-763t127-85.5Q397-880 480-880t156 31.5Q709-817 763-763t85.5 127Q880-563 880-480t-31.5 156Q817-251 763-197t-127 85.5Q563-80 480-80t-156-31.5ZM480-140q61.01 0 117.51-20.5Q654-181 699-220L220-699q-38 46-59 102.17T140-480q0 142.37 98.81 241.19Q337.63-140 480-140Zm259-121q37-45 59-101.49 22-56.5 22-117.51 0-142.38-98.81-241.19T480-820q-60.66 0-116.83 21T261-739l478 478ZM480-480Z"/></svg>
+                                        القائمة السوداء
+                                    </button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination-like footer for table -->
+<div class="p-4 bg-surface-container-lowest border-t border-border-subtle flex items-center justify-between">
+<span class="text-text-secondary font-label-sm text-label-sm">عرض 1-4 من أصل 12 جهاز متصل</span>
+<div class="flex gap-2">
+<button class="w-8 h-8 flex items-center justify-center rounded border border-border-subtle hover:bg-surface-container transition-all">
+<svg class="ms-ico text-[20px]" viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M530-481 332-679l43-43 241 241-241 241-43-43 198-198Z"/></svg>
+</button>
+<button class="w-8 h-8 flex items-center justify-center rounded border border-border-subtle hover:bg-surface-container transition-all">
+<svg class="ms-ico text-[20px]" viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M561-240 320-481l241-241 43 43-198 198 198 198-43 43Z"/></svg>
+</button>
+</div>
+</div>
+</div>
+</div>
+	</div>
+</div>
+
+<footer class="sl-footer">
+	<div class="sl-footer-inner">
+		<ul class="breadcrumb" id="modemenu" style="display:flex">
+			<li class="active"><a href="../index-luci.html">صفحات LuCI الأصلية</a></li>
+		</ul>
+		<span class="sl-footer-meta">
+			<a href="#">LuCI</a><span class="sl-sep">/</span><a href="#">OpenWrt 24.10</a>
+		</span>
+		<span class="sl-footer-brand">
+			<span class="sl-footer-badge">S</span><span>Alagha Technology</span>
+		</span>
+	</div>
+</footer>
+
+<script>
+(function () {
+	var root = document.documentElement,
+	    topmenu = document.getElementById('topmenu');
+
+	try {
+		var pref = localStorage.getItem('smartlink.theme');
+		if (pref) {
+			root.setAttribute('data-darkmode', pref === 'dark' ? 'true' : 'false');
+			root.setAttribute('data-theme-pref', pref);
+		}
+	} catch (e) {}
+
+	document.getElementById('sl-theme-toggle').addEventListener('click', function () {
+		var dark = root.getAttribute('data-darkmode') === 'true',
+		    next = dark ? 'light' : 'dark';
+		root.setAttribute('data-darkmode', dark ? 'false' : 'true');
+		root.setAttribute('data-theme-pref', next);
+		try { localStorage.setItem('smartlink.theme', next); } catch (e) {}
+	});
+
+	document.getElementById('sl-menu-toggle').addEventListener('click', function () {
+		topmenu.classList.toggle('sl-open');
+	});
+
+	topmenu.addEventListener('click', function (ev) {
+		var link = ev.target.closest('li.dropdown > a.menu');
+		if (!link) return;
+		ev.preventDefault();
+		var li = link.parentNode, was = li.classList.contains('sl-open');
+		topmenu.querySelectorAll('li.sl-open').forEach(function (n) { n.classList.remove('sl-open'); });
+		if (!was) li.classList.add('sl-open');
+	});
+
+	document.addEventListener('click', function (ev) {
+		if (!ev.target.closest('#topmenu'))
+			topmenu.querySelectorAll('li.sl-open').forEach(function (n) { n.classList.remove('sl-open'); });
+	});
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-darkmode="false" data-theme-pref="light">
+<head>
+<meta charset="utf-8">
+<title>SMARTLink — الإنترنت</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="../../luci-theme-smartlink/htdocs/luci-static/smartlink/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../luci-theme-smartlink/htdocs/luci-static/smartlink/cascade.css">
+<link rel="stylesheet" href="../../luci-app-smartlink/htdocs/luci-static/resources/smartlink-app/fonts.css">
+<link rel="stylesheet" href="../../luci-app-smartlink/htdocs/luci-static/resources/smartlink-app/app.css">
+<link rel="stylesheet" href="../../luci-app-smartlink/htdocs/luci-static/resources/smartlink-app/pages.css">
+</head>
+<body class="lang_ar" data-page="internet">
+
+<header class="sl-header">
+	<div class="sl-header-inner">
+		<a class="brand" href="dashboard.html"><svg class="sl-logo" viewBox="0 0 32 32" aria-hidden="true"><rect x="1" y="1" width="30" height="30" rx="8" fill="currentColor" opacity=".16"/><path fill="currentColor" d="M20.8 10.4a6.6 6.6 0 0 0-4.9-2 6.6 6.6 0 0 0-4.7 1.9c-.6.6-.6 1.5 0 2.1.6.6 1.5.6 2.1 0a3.7 3.7 0 0 1 2.6-1c1 0 1.9.4 2.7 1.1.6.6 1.5.5 2.1-.1.6-.6.6-1.4.1-2Zm3.4-3.5A11.4 11.4 0 0 0 16 3.6c-3 0-5.9 1.2-8.1 3.3-.6.6-.6 1.5 0 2.1.6.6 1.5.6 2.1 0A8.4 8.4 0 0 1 16 6.6c2.2 0 4.3.8 5.9 2.3.6.6 1.6.6 2.2 0 .6-.6.6-1.5.1-2Zm-8.2 8.7a3.6 3.6 0 0 0-3.6 3.6c0 .9.3 1.7.9 2.4l2.7 3.2 2.7-3.2c.6-.7.9-1.5.9-2.4a3.6 3.6 0 0 0-3.6-3.6Z"/></svg><span>SMARTLink</span></a>
+		<ul class="nav" id="topmenu"><li class=""><a href="dashboard.html">الرئيسية</a></li><li class="dropdown active"><a class="menu" href="#">الشبكة</a><ul class="dropdown-menu"><li class=""><a href="network.html">نظرة عامة</a></li><li class=""><a href="devices.html">الأجهزة المتصلة</a></li><li class=""><a href="wireless.html">الشبكة اللاسلكية</a></li><li class=""><a href="lan.html">الشبكة المحلية</a></li><li class="active"><a href="internet.html">الإنترنت</a></li></ul></li><li class=""><a href="application.html">التطبيق</a></li><li class=""><a href="tools.html">الأدوات</a></li><li class="dropdown "><a class="menu" href="#">الإعداد</a><ul class="dropdown-menu"><li class=""><a href="welcome.html">مرحباً</a></li><li class=""><a href="setup1.html">الخطوة 1</a></li><li class=""><a href="setup2.html">الخطوة 2</a></li><li class=""><a href="setupdone.html">اكتمل الإعداد</a></li></ul></li></ul>
+		<div class="sl-header-actions">
+			<div id="indicators"><span class="label">معاينة</span></div>
+			<button type="button" class="sl-icon-btn sl-theme-toggle" id="sl-theme-toggle"
+			        title="تبديل النمط"><svg class="sl-ico sl-ico-sun" viewBox="0 -960 960 960"><path d="M480-360q50 0 85-35t35-85q0-50-35-85t-85-35q-50 0-85 35t-35 85q0 50 35 85t85 35Zm0 60q-75 0-127.5-52.5T300-480q0-75 52.5-127.5T480-660q75 0 127.5 52.5T660-480q0 75-52.5 127.5T480-300ZM200-450H40v-60h160v60Zm720 0H760v-60h160v60ZM450-760v-160h60v160h-60Zm0 720v-160h60v160h-60ZM260-655l-101-97 43-44 96 100-38 41Zm441 442-97-101 41-39 99 97-43 43Zm-97-442 97-101 43 41-100 99-40-39ZM254-212l-42-44 98-96 22 19 20 21-98 100Z"/></svg><svg class="sl-ico sl-ico-moon" viewBox="0 -960 960 960"><path d="M480-120q-150 0-255-105T120-480q0-150 105-255t255-105q8 0 17 .5t23 1.5q-36 32-56 79t-20 99q0 90 63 153t153 63q52 0 99-18.5t79-51.5q1 12 1.5 19.5t.5 14.5q0 150-105 255T480-120Zm0-60q109 0 190-67.5T769-406q-25 11-53.5 16.5T660-384q-115 0-195.5-80.5T384-660q0-24 5-51.5t18-62.5q-98 27-162.5 109.5T180-480q0 125 87.5 212.5T480-180Z"/></svg></button>
+			<button type="button" class="sl-icon-btn sl-menu-toggle" id="sl-menu-toggle"
+			        title="القائمة"><svg class="sl-ico" viewBox="0 -960 960 960"><path d="M120-240v-60h720v60H120Zm0-210v-60h720v60H120Zm0-210v-60h720v60H120Z"/></svg></button>
+		</div>
+	</div>
+</header>
+
+<div id="maincontent" class="container">
+	<div id="view">
+		<div class="smartlink-page" data-sl-page="internet" dir="rtl" lang="ar">
+<!-- Page Title & Navigation -->
+<div class="mb-8">
+<h1 class="font-headline-lg text-headline-lg text-on-surface mb-2">إعدادات الإنترنت (WAN)</h1>
+<p class="text-text-secondary font-body-md text-body-md">قم بتكوين إعدادات اتصال الشبكة الواسعة للوصول إلى الإنترنت.</p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Left Panel: Hero Graphic -->
+<div class="lg:col-span-4 hidden lg:block">
+<div class="bg-background-card rounded-xl p-card-padding border border-border-subtle h-full flex flex-col items-center justify-center text-center">
+<div class="w-24 h-24 bg-accent-internet/10 rounded-full flex items-center justify-center mb-6">
+<svg class="ms-ico text-accent-internet text-5xl" viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M324-111.5Q251-143 197-197t-85.5-127Q80-397 80-480t31.5-156Q143-709 197-763t127-85.5Q397-880 480-880t156 31.5Q709-817 763-763t85.5 127Q880-563 880-480t-31.5 156Q817-251 763-197t-127 85.5Q563-80 480-80t-156-31.5ZM437-141v-82q-35 0-59-26t-24-61v-44L149-559q-5 20-7 39.5t-2 39.5q0 130 84.5 227T437-141Zm294-108q44-48 66.5-107.5T820-480q0-106-58-192.5T607-799v18q0 35-24 61t-59 26h-87v87q0 17-13.5 28T393-568h-83v88h258q17 0 28 13t11 30v127h43q29 0 51 17t30 44Z"/></svg>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">حالة الاتصال</h3>
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent-lan/10 text-accent-lan font-label-lg text-label-lg">
+<span class="w-2 h-2 rounded-full bg-accent-lan"></span>
+                        متصل
+                    </div>
+<div class="mt-8 space-y-4 w-full">
+<div class="flex justify-between items-center p-3 bg-surface-container-low rounded-lg">
+<span class="text-text-secondary font-body-md">عنوان IP الخارج</span>
+<span class="font-label-lg text-on-surface">192.168.100.45</span>
+</div>
+<div class="flex justify-between items-center p-3 bg-surface-container-low rounded-lg">
+<span class="text-text-secondary font-body-md">وقت التشغيل</span>
+<span class="font-label-lg text-on-surface">12 ساعة 34 دقيقة</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Panel: Settings Form -->
+<div class="lg:col-span-8">
+<div class="bg-background-card rounded-xl shadow-sm border border-border-subtle overflow-hidden">
+<!-- Protocol Tabs -->
+<div class="flex border-b border-border-subtle">
+<button class="flex-1 py-4 text-center font-label-lg text-label-lg border-b-2 border-primary text-primary transition-colors" id="tab-ipv4" onclick="switchTab('ipv4')">
+                            IPv4
+                        </button>
+<button class="flex-1 py-4 text-center font-label-lg text-label-lg border-b-2 border-transparent text-text-secondary hover:text-on-surface transition-colors" id="tab-ipv6" onclick="switchTab('ipv6')">
+                            IPv6
+                        </button>
+</div>
+<div class="p-card-padding space-y-8">
+<!-- Connection Type -->
+<div class="space-y-3">
+<label class="block font-label-lg text-label-lg text-on-surface">طريقة الاتصال بالإنترنت</label>
+<div class="relative">
+<select class="w-full bg-white border border-border-subtle rounded-lg py-3 px-4 appearance-none focus:ring-2 focus:ring-primary-container focus:border-primary outline-none text-on-surface font-body-md">
+<option value="pppoe">PPPoE</option>
+<option selected="" value="dhcp">DHCP (تلقائي)</option>
+<option value="static">عنوان IP ثابت</option>
+</select>
+<svg class="ms-ico absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none text-text-secondary" viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M480-344 240-584l43-43 197 197 197-197 43 43-240 240Z"/></svg>
+</div>
+</div>
+<!-- Main Form Area -->
+<div class="space-y-6" id="ipv4-content">
+<!-- Basic DHCP Display (Contextual) -->
+<div class="p-4 bg-surface-container-low rounded-xl flex items-start gap-3">
+<svg class="ms-ico text-primary" viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M453-280h60v-240h-60v240Zm50.5-323.2q9.5-9.2 9.5-22.8 0-14.45-9.48-24.22-9.48-9.78-23.5-9.78t-23.52 9.78Q447-640.45 447-626q0 13.6 9.48 22.8 9.48 9.2 23.5 9.2t23.52-9.2ZM480.27-80q-82.74 0-155.5-31.5Q252-143 197.5-197.5t-86-127.34Q80-397.68 80-480.5t31.5-155.66Q143-709 197.5-763t127.34-85.5Q397.68-880 480.5-880t155.66 31.5Q709-817 763-763t85.5 127Q880-563 880-480.27q0 82.74-31.5 155.5Q817-252 763-197.68q-54 54.31-127 86Q563-80 480.27-80Zm.23-60Q622-140 721-239.5t99-241Q820-622 721.19-721T480-820q-141 0-240.5 98.81T140-480q0 141 99.5 240.5t241 99.5Zm-.5-340Z"/></svg>
+<p class="text-text-secondary font-body-md">سيقوم الراوتر بالحصول على إعدادات الشبكة تلقائياً من مزود الخدمة الخاص بك.</p>
+</div>
+<!-- Advanced Section -->
+<div class="border border-border-subtle rounded-xl overflow-hidden" id="advanced-accordion">
+<button class="w-full flex items-center justify-between p-4 bg-surface-container-lowest hover:bg-surface-container-low transition-colors" onclick="toggleAdvanced()">
+<div class="flex items-center gap-3">
+<svg class="ms-ico text-text-secondary" viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M123-40v-170q-34-13-58.5-42.5T40-317v-398h83v-175q0-14 8-22t22-8q14 0 22 8t8 22v175h83v398q0 35-24 64.5T183-210v170h-60Zm327 0v-170q-34-13-58.5-42.5T367-317v-398h83v-175q0-14 8-22t22-8q14 0 22 8t8 22v175h83v398q0 35-24 64.5T510-210v170h-60Zm327 0v-170q-34-13-58.5-42.5T694-317v-398h83v-175q0-14 8-22t22-8q14 0 22 8t8 22v175h83v398q0 35-24.5 64.5T837-210v170h-60ZM100-655v184h106v-184H100Zm327 0v184h106v-184H427Zm327 0v184h106v-184H754ZM153-267q22 0 37.5-15t15.5-35v-94H100v94q0 20 15.5 35t37.5 15Zm327 0q22 0 37.5-15t15.5-35v-94H427v94q0 20 15.5 35t37.5 15Zm327 0q22 0 37.5-15t15.5-35v-94H754v94q0 20 15.5 35t37.5 15ZM153-441Zm327 0Zm327 0Z"/></svg>
+<span class="font-label-lg text-label-lg text-on-surface">إعدادات متقدمة</span>
+</div>
+<svg class="ms-ico rotate-icon text-text-secondary" viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M480-344 240-584l43-43 197 197 197-197 43 43-240 240Z"/></svg>
+</button>
+<div class="expandable-content bg-white">
+<div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="font-label-lg text-label-lg text-on-surface">عنوان MAC</label>
+<input class="w-full bg-white border border-border-subtle rounded-lg py-2.5 px-4 focus:ring-2 focus:ring-primary-container focus:border-primary outline-none font-body-md" placeholder="00:00:00:00:00:00" type="text"/>
+</div>
+<div class="space-y-2">
+<label class="font-label-lg text-label-lg text-on-surface">MTU</label>
+<input class="w-full bg-white border border-border-subtle rounded-lg py-2.5 px-4 focus:ring-2 focus:ring-primary-container focus:border-primary outline-none font-body-md" type="number" value="1500"/>
+</div>
+<div class="space-y-2">
+<label class="font-label-lg text-label-lg text-on-surface">اسم المضيف</label>
+<input class="w-full bg-white border border-border-subtle rounded-lg py-2.5 px-4 focus:ring-2 focus:ring-primary-container focus:border-primary outline-none font-body-md" placeholder="SMARTLink-Router" type="text"/>
+</div>
+<div class="space-y-2">
+<label class="font-label-lg text-label-lg text-on-surface">VLAN ID</label>
+<input class="w-full bg-white border border-border-subtle rounded-lg py-2.5 px-4 focus:ring-2 focus:ring-primary-container focus:border-primary outline-none font-body-md" placeholder="غير مفعل" type="number"/>
+</div>
+<div class="md:col-span-2 space-y-2">
+<label class="font-label-lg text-label-lg text-on-surface">DNS المفضل</label>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<input class="w-full bg-white border border-border-subtle rounded-lg py-2.5 px-4 focus:ring-2 focus:ring-primary-container focus:border-primary outline-none font-body-md" placeholder="8.8.8.8" type="text"/>
+<input class="w-full bg-white border border-border-subtle rounded-lg py-2.5 px-4 focus:ring-2 focus:ring-primary-container focus:border-primary outline-none font-body-md" placeholder="8.8.4.4" type="text"/>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Actions -->
+<div class="flex justify-end pt-4 border-t border-border-subtle">
+<button class="bg-primary-container text-on-primary font-label-lg text-label-lg px-12 py-3 rounded-lg hover:brightness-110 active:scale-95 transition-all shadow-sm">
+                                حفظ
+                            </button>
+</div>
+</div>
+</div>
+<!-- Additional Context Info Cards -->
+<div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="bg-surface-container-low rounded-xl p-5 border border-border-subtle flex items-center gap-4">
+<div class="w-12 h-12 bg-white rounded-lg flex items-center justify-center shadow-sm">
+<svg class="ms-ico text-primary" viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M473.5-303.5Q517-305 537-336l216-339-335 219q-30 20-32 64t21 67q23 23 66.5 21.5ZM478-799q57 0 119 18.5T716-717l-52 37q-45-30-96.5-44.5T477.98-739q-140.47 0-239.23 100.22Q140-538.57 140-396.02 140-351 152.5-305q12.5 46 35.5 85h579q22-36 35-84t13-94q0-42-12.5-90.5T758-578l39-52q38 56 57 112.5T875-404q2 60-12 113t-41 98q-12 23-25.5 28t-33.5 5H192q-17 0-33.5-8.5T134-193q-26-48-40-97.5T80-396q0-83 31.5-156.5t85.5-128Q251-735 323.68-767T478-799Zm-9 331Z"/></svg>
+</div>
+<div>
+<p class="font-label-lg text-on-surface">سرعة الاتصال</p>
+<p class="font-body-md text-text-secondary">1000 Mbps / Full Duplex</p>
+</div>
+</div>
+<div class="bg-surface-container-low rounded-xl p-5 border border-border-subtle flex items-center gap-4">
+<div class="w-12 h-12 bg-white rounded-lg flex items-center justify-center shadow-sm">
+<svg class="ms-ico text-primary" viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M480-81q-140-35-230-162.5T160-523v-238l320-120 320 120v238q0 152-90 279.5T480-81Zm0-62q115-38 187.5-143.5T740-523v-196l-260-98-260 98v196q0 131 72.5 236.5T480-143Zm0-337Z"/></svg>
+</div>
+<div>
+<p class="font-label-lg text-on-surface">جدار الحماية</p>
+<p class="font-body-md text-text-secondary">مفعل (المستوى المتوسط)</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+	</div>
+</div>
+
+<footer class="sl-footer">
+	<div class="sl-footer-inner">
+		<ul class="breadcrumb" id="modemenu" style="display:flex">
+			<li class="active"><a href="../index-luci.html">صفحات LuCI الأصلية</a></li>
+		</ul>
+		<span class="sl-footer-meta">
+			<a href="#">LuCI</a><span class="sl-sep">/</span><a href="#">OpenWrt 24.10</a>
+		</span>
+		<span class="sl-footer-brand">
+			<span class="sl-footer-badge">S</span><span>Alagha Technology</span>
+		</span>
+	</div>
+</footer>
+
+<script>
+(function () {
+	var root = document.documentElement,
+	    topmenu = document.getElementById('topmenu');
+
+	try {
+		var pref = localStorage.getItem('smartlink.theme');
+		if (pref) {
+			root.setAttribute('data-darkmode', pref === 'dark' ? 'true' : 'false');
+			root.setAttribute('data-theme-pref', pref);
+		}
+	} catch (e) {}
+
+	document.getElementById('sl-theme-toggle').addEventListener('click', function () {
+		var dark = root.getAttribute('data-darkmode') === 'true',
+		    next = dark ? 'light' : 'dark';
+		root.setAttribute('data-darkmode', dark ? 'false' : 'true');
+		root.setAttribute('data-theme-pref', next);
+		try { localStorage.setItem('smartlink.theme', next); } catch (e) {}
+	});
+
+	document.getElementById('sl-menu-toggle').addEventListener('click', function () {
+		topmenu.classList.toggle('sl-open');
+	});
+
+	topmenu.addEventListener('click', function (ev) {
+		var link = ev.target.closest('li.dropdown > a.menu');
+		if (!link) return;
+		ev.preventDefault();
+		var li = link.parentNode, was = li.classList.contains('sl-open');
+		topmenu.querySelectorAll('li.sl-open').forEach(function (n) { n.classList.remove('sl-open'); });
+		if (!was) li.classList.add('sl-open');
+	});
+
+	document.addEventListener('click', function (ev) {
+		if (!ev.target.closest('#topmenu'))
+			topmenu.querySelectorAll('li.sl-open').forEach(function (n) { n.classList.remove('sl-open'); });
+	});
+})();
+</script>
+</body>
+</html>

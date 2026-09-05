@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-darkmode="false" data-theme-pref="light">
+<head>
+<meta charset="utf-8">
+<title>SMARTLink — الخطوة 1</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="../../luci-theme-smartlink/htdocs/luci-static/smartlink/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../luci-theme-smartlink/htdocs/luci-static/smartlink/cascade.css">
+<link rel="stylesheet" href="../../luci-app-smartlink/htdocs/luci-static/resources/smartlink-app/fonts.css">
+<link rel="stylesheet" href="../../luci-app-smartlink/htdocs/luci-static/resources/smartlink-app/app.css">
+<link rel="stylesheet" href="../../luci-app-smartlink/htdocs/luci-static/resources/smartlink-app/pages.css">
+</head>
+<body class="lang_ar" data-page="setup1">
+
+<header class="sl-header">
+	<div class="sl-header-inner">
+		<a class="brand" href="dashboard.html"><svg class="sl-logo" viewBox="0 0 32 32" aria-hidden="true"><rect x="1" y="1" width="30" height="30" rx="8" fill="currentColor" opacity=".16"/><path fill="currentColor" d="M20.8 10.4a6.6 6.6 0 0 0-4.9-2 6.6 6.6 0 0 0-4.7 1.9c-.6.6-.6 1.5 0 2.1.6.6 1.5.6 2.1 0a3.7 3.7 0 0 1 2.6-1c1 0 1.9.4 2.7 1.1.6.6 1.5.5 2.1-.1.6-.6.6-1.4.1-2Zm3.4-3.5A11.4 11.4 0 0 0 16 3.6c-3 0-5.9 1.2-8.1 3.3-.6.6-.6 1.5 0 2.1.6.6 1.5.6 2.1 0A8.4 8.4 0 0 1 16 6.6c2.2 0 4.3.8 5.9 2.3.6.6 1.6.6 2.2 0 .6-.6.6-1.5.1-2Zm-8.2 8.7a3.6 3.6 0 0 0-3.6 3.6c0 .9.3 1.7.9 2.4l2.7 3.2 2.7-3.2c.6-.7.9-1.5.9-2.4a3.6 3.6 0 0 0-3.6-3.6Z"/></svg><span>SMARTLink</span></a>
+		<ul class="nav" id="topmenu"><li class=""><a href="dashboard.html">الرئيسية</a></li><li class="dropdown "><a class="menu" href="#">الشبكة</a><ul class="dropdown-menu"><li class=""><a href="network.html">نظرة عامة</a></li><li class=""><a href="devices.html">الأجهزة المتصلة</a></li><li class=""><a href="wireless.html">الشبكة اللاسلكية</a></li><li class=""><a href="lan.html">الشبكة المحلية</a></li><li class=""><a href="internet.html">الإنترنت</a></li></ul></li><li class=""><a href="application.html">التطبيق</a></li><li class=""><a href="tools.html">الأدوات</a></li><li class="dropdown active"><a class="menu" href="#">الإعداد</a><ul class="dropdown-menu"><li class=""><a href="welcome.html">مرحباً</a></li><li class="active"><a href="setup1.html">الخطوة 1</a></li><li class=""><a href="setup2.html">الخطوة 2</a></li><li class=""><a href="setupdone.html">اكتمل الإعداد</a></li></ul></li></ul>
+		<div class="sl-header-actions">
+			<div id="indicators"><span class="label">معاينة</span></div>
+			<button type="button" class="sl-icon-btn sl-theme-toggle" id="sl-theme-toggle"
+			        title="تبديل النمط"><svg class="sl-ico sl-ico-sun" viewBox="0 -960 960 960"><path d="M480-360q50 0 85-35t35-85q0-50-35-85t-85-35q-50 0-85 35t-35 85q0 50 35 85t85 35Zm0 60q-75 0-127.5-52.5T300-480q0-75 52.5-127.5T480-660q75 0 127.5 52.5T660-480q0 75-52.5 127.5T480-300ZM200-450H40v-60h160v60Zm720 0H760v-60h160v60ZM450-760v-160h60v160h-60Zm0 720v-160h60v160h-60ZM260-655l-101-97 43-44 96 100-38 41Zm441 442-97-101 41-39 99 97-43 43Zm-97-442 97-101 43 41-100 99-40-39ZM254-212l-42-44 98-96 22 19 20 21-98 100Z"/></svg><svg class="sl-ico sl-ico-moon" viewBox="0 -960 960 960"><path d="M480-120q-150 0-255-105T120-480q0-150 105-255t255-105q8 0 17 .5t23 1.5q-36 32-56 79t-20 99q0 90 63 153t153 63q52 0 99-18.5t79-51.5q1 12 1.5 19.5t.5 14.5q0 150-105 255T480-120Zm0-60q109 0 190-67.5T769-406q-25 11-53.5 16.5T660-384q-115 0-195.5-80.5T384-660q0-24 5-51.5t18-62.5q-98 27-162.5 109.5T180-480q0 125 87.5 212.5T480-180Z"/></svg></button>
+			<button type="button" class="sl-icon-btn sl-menu-toggle" id="sl-menu-toggle"
+			        title="القائمة"><svg class="sl-ico" viewBox="0 -960 960 960"><path d="M120-240v-60h720v60H120Zm0-210v-60h720v60H120Zm0-210v-60h720v60H120Z"/></svg></button>
+		</div>
+	</div>
+</header>
+
+<div id="maincontent" class="container">
+	<div id="view">
+		<div class="smartlink-page" data-sl-page="setup1" dir="rtl" lang="ar">
+<!-- Sidebar Stepper -->
+<aside class="md:col-span-3">
+<div class="bg-background-card rounded-xl p-6 shadow-[0px_2px_8px_rgba(51,56,61,0.04)] sticky top-24">
+<div class="flex flex-col gap-8">
+<!-- Step 1: Active -->
+<div class="flex items-center gap-4 group">
+<div class="w-10 h-10 rounded-full bg-primary-container text-on-primary flex items-center justify-center shrink-0 font-bold">
+                            1
+                        </div>
+<div class="flex flex-col text-right">
+<span class="font-label-lg text-label-lg text-primary">الخطوة 1</span>
+<span class="font-headline-md text-headline-md text-on-surface">الوصول إلى النطاق العريض</span>
+</div>
+</div>
+<!-- Connector -->
+<div class="mr-5 h-8 border-r-2 border-border-subtle"></div>
+<!-- Step 2: Inactive -->
+<div class="flex items-center gap-4 opacity-50">
+<div class="w-10 h-10 rounded-full bg-surface-container-high text-text-secondary flex items-center justify-center shrink-0 font-bold">
+                            2
+                        </div>
+<div class="flex flex-col text-right">
+<span class="font-label-lg text-label-lg text-text-secondary">الخطوة 2</span>
+<span class="font-headline-md text-headline-md text-on-surface">إعداد Wi-Fi</span>
+</div>
+</div>
+<!-- Connector -->
+<div class="mr-5 h-8 border-r-2 border-border-subtle"></div>
+<!-- Step 3: Inactive -->
+<div class="flex items-center gap-4 opacity-50">
+<div class="w-10 h-10 rounded-full bg-surface-container-high text-text-secondary flex items-center justify-center shrink-0 font-bold">
+                            3
+                        </div>
+<div class="flex flex-col text-right">
+<span class="font-label-lg text-label-lg text-text-secondary">الخطوة 3</span>
+<span class="font-headline-md text-headline-md text-on-surface">اكتمل</span>
+</div>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Configuration Card -->
+<section class="md:col-span-9">
+<div class="bg-background-card rounded-xl p-card-padding shadow-[0px_2px_8px_rgba(51,56,61,0.04)] border border-border-subtle">
+<div class="mb-8">
+<h1 class="font-headline-lg text-headline-lg text-on-surface mb-2">إعداد اتصال الإنترنت</h1>
+<p class="font-body-md text-body-md text-text-secondary">يرجى تحديد تفاصيل الاتصال المقدمة من مزود خدمة الإنترنت الخاص بك للمتابعة.</p>
+</div>
+<form class="space-y-8">
+<!-- Internet Connection Type -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+<div>
+<label class="block font-label-lg text-label-lg text-on-surface mb-2">نوع اتصال الإنترنت</label>
+<div class="relative">
+<select class="w-full h-12 bg-white border border-border-subtle rounded-lg px-4 focus-ring appearance-none text-on-surface font-body-md">
+<option selected="" value="dhcp">DHCP (تلقائي)</option>
+<option value="static">Static IP (ثابت)</option>
+<option value="pppoe">PPPoE</option>
+<option value="bridge">Bridge Mode</option>
+</select>
+<svg class="ms-ico absolute left-4 top-3 text-text-secondary pointer-events-none" viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M480-344 240-584l43-43 197 197 197-197 43 43-240 240Z"/></svg>
+</div>
+</div>
+<div class="hidden md:block">
+<p class="text-text-secondary font-body-md">معظم مزودي الخدمة يستخدمون DHCP للحصول على عنوان IP تلقائياً.</p>
+</div>
+</div>
+<!-- Country Code -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+<div>
+<label class="block font-label-lg text-label-lg text-on-surface mb-2">رمز البلد</label>
+<div class="relative">
+<select class="w-full h-12 bg-white border border-border-subtle rounded-lg px-4 focus-ring appearance-none text-on-surface font-body-md">
+<option selected="" value="sa">المملكة العربية السعودية (+966)</option>
+<option value="ae">الإمارات العربية المتحدة (+971)</option>
+<option value="kw">الكويت (+965)</option>
+<option value="eg">مصر (+20)</option>
+</select>
+<svg class="ms-ico absolute left-4 top-3 text-text-secondary pointer-events-none" viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M324-111.5Q251-143 197-197t-85.5-127Q80-397 80-480t31.5-156Q143-709 197-763t127-85.5Q397-880 480-880t156 31.5Q709-817 763-763t85.5 127Q880-563 880-480t-31.5 156Q817-251 763-197t-127 85.5Q563-80 480-80t-156-31.5ZM437-141v-82q-35 0-59-26t-24-61v-44L149-559q-5 20-7 39.5t-2 39.5q0 130 84.5 227T437-141Zm294-108q44-48 66.5-107.5T820-480q0-106-58-192.5T607-799v18q0 35-24 61t-59 26h-87v87q0 17-13.5 28T393-568h-83v88h258q17 0 28 13t11 30v127h43q29 0 51 17t30 44Z"/></svg>
+</div>
+</div>
+<div class="hidden md:block">
+<p class="text-text-secondary font-body-md">يساعد رمز البلد في تحسين إعدادات الترددات اللاسلكية والامتثال المحلي.</p>
+</div>
+</div>
+<!-- Timezone -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center border-b border-border-subtle pb-8">
+<div>
+<label class="block font-label-lg text-label-lg text-on-surface mb-2">المنطقة الزمنية</label>
+<div class="relative">
+<select class="w-full h-12 bg-white border border-border-subtle rounded-lg px-4 focus-ring appearance-none text-on-surface font-body-md">
+<option selected="" value="gmt3">(GMT +03:00) الرياض، الكويت، بغداد</option>
+<option value="gmt4">(GMT +04:00) أبوظبي، مسقط</option>
+<option value="gmt2">(GMT +02:00) القاهرة، عمان</option>
+</select>
+<svg class="ms-ico absolute left-4 top-3 text-text-secondary pointer-events-none" viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="m627-287 45-45-159-160v-201h-60v225l174 181ZM480-80q-82 0-155-31.5t-127.5-86Q143-252 111.5-325T80-480q0-82 31.5-155t86-127.5Q252-817 325-848.5T480-880q82 0 155 31.5t127.5 86Q817-708 848.5-635T880-480q0 82-31.5 155t-86 127.5Q708-143 635-111.5T480-80Zm0-400Zm0 340q140 0 240-100t100-240q0-140-100-240T480-820q-140 0-240 100T140-480q0 140 100 240t240 100Z"/></svg>
+</div>
+</div>
+<div class="hidden md:block">
+<p class="text-text-secondary font-body-md">يتم استخدام المنطقة الزمنية لجدولة التحديثات وفترات توفير الطاقة.</p>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="flex justify-start gap-4 pt-4">
+<button class="bg-primary-container text-on-primary font-label-lg text-label-lg px-10 py-3 rounded-lg hover:brightness-110 active:scale-95 transition-all shadow-md" type="submit">
+                            التالي
+                        </button>
+<button class="bg-transparent border border-primary-container text-primary-container font-label-lg text-label-lg px-10 py-3 rounded-lg hover:bg-primary-container/5 transition-all" type="button">
+                            تخطي مؤقتاً
+                        </button>
+</div>
+</form>
+</div>
+<!-- Help Section (Asymmetric UI Detail) -->
+<div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="bg-surface-container-low p-6 rounded-xl flex items-start gap-4">
+<svg class="ms-ico text-accent-internet" viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M511-258q11-11 11-27t-11-27q-11-11-27-11t-27 11q-11 11-11 27t11 27q11 11 27 11t27-11Zm-62-135h59q0-26 6.5-47.5T555-490q31-26 44-51t13-55q0-53-34.5-85T486-713q-49 0-86.5 24.5T345-621l53 20q11-28 33-43.5t52-15.5q34 0 55 18.5t21 47.5q0 22-13 41.5T508-512q-30 26-44.5 51.5T449-393Zm31 313q-82 0-155-31.5t-127.5-86Q143-252 111.5-325T80-480q0-83 31.5-156t86-127Q252-817 325-848.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 82-31.5 155T763-197.5q-54 54.5-127 86T480-80Zm0-60q142 0 241-99.5T820-480q0-142-99-241t-241-99q-141 0-240.5 99T140-480q0 141 99.5 240.5T480-140Zm0-340Z"/></svg>
+<div>
+<h4 class="font-label-lg text-label-lg text-on-surface mb-1">هل تواجه مشكلة؟</h4>
+<p class="font-body-md text-body-md text-text-secondary">تأكد من توصيل كابل الإنترنت (WAN) بالمنفذ الأزرق خلف الجهاز.</p>
+</div>
+</div>
+<div class="bg-surface-container-low p-6 rounded-xl flex items-start gap-4">
+<svg class="ms-ico text-accent-devices" viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M422.5-103.5Q399-127 399-161h162q0 34-23.5 57.5T480-80q-34 0-57.5-23.5ZM318-223v-60h324v60H318Zm5-121q-66-43-104.5-107.5T180-597q0-122 89-211t211-89q122 0 211 89t89 211q0 81-38 145.5T637-344H323Zm22-60h271q48-32 76-83t28-110q0-99-70.5-169.5T480-837q-99 0-169.5 70.5T240-597q0 59 28 110t77 83Zm135 0Z"/></svg>
+<div>
+<h4 class="font-label-lg text-label-lg text-on-surface mb-1">نصيحة سريعة</h4>
+<p class="font-body-md text-body-md text-text-secondary">استخدم DHCP إذا لم تكن متأكداً، حيث يقوم معظم المزودين بالتهيئة آلياً.</p>
+</div>
+</div>
+</div>
+</section>
+</div>
+	</div>
+</div>
+
+<footer class="sl-footer">
+	<div class="sl-footer-inner">
+		<ul class="breadcrumb" id="modemenu" style="display:flex">
+			<li class="active"><a href="../index-luci.html">صفحات LuCI الأصلية</a></li>
+		</ul>
+		<span class="sl-footer-meta">
+			<a href="#">LuCI</a><span class="sl-sep">/</span><a href="#">OpenWrt 24.10</a>
+		</span>
+		<span class="sl-footer-brand">
+			<span class="sl-footer-badge">S</span><span>Alagha Technology</span>
+		</span>
+	</div>
+</footer>
+
+<script>
+(function () {
+	var root = document.documentElement,
+	    topmenu = document.getElementById('topmenu');
+
+	try {
+		var pref = localStorage.getItem('smartlink.theme');
+		if (pref) {
+			root.setAttribute('data-darkmode', pref === 'dark' ? 'true' : 'false');
+			root.setAttribute('data-theme-pref', pref);
+		}
+	} catch (e) {}
+
+	document.getElementById('sl-theme-toggle').addEventListener('click', function () {
+		var dark = root.getAttribute('data-darkmode') === 'true',
+		    next = dark ? 'light' : 'dark';
+		root.setAttribute('data-darkmode', dark ? 'false' : 'true');
+		root.setAttribute('data-theme-pref', next);
+		try { localStorage.setItem('smartlink.theme', next); } catch (e) {}
+	});
+
+	document.getElementById('sl-menu-toggle').addEventListener('click', function () {
+		topmenu.classList.toggle('sl-open');
+	});
+
+	topmenu.addEventListener('click', function (ev) {
+		var link = ev.target.closest('li.dropdown > a.menu');
+		if (!link) return;
+		ev.preventDefault();
+		var li = link.parentNode, was = li.classList.contains('sl-open');
+		topmenu.querySelectorAll('li.sl-open').forEach(function (n) { n.classList.remove('sl-open'); });
+		if (!was) li.classList.add('sl-open');
+	});
+
+	document.addEventListener('click', function (ev) {
+		if (!ev.target.closest('#topmenu'))
+			topmenu.querySelectorAll('li.sl-open').forEach(function (n) { n.classList.remove('sl-open'); });
+	});
+})();
+</script>
+</body>
+</html>
