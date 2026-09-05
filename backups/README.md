@@ -32,10 +32,15 @@ sha256sum km08-708h-eeprom.bin
 | UBI volume 0 | `rootfs` — squashfs |
 | `0x02B20000` | UBI volume 1 — `rootfs_data`, UBIFS |
 
-`rootfs_data` is where a running system keeps `/etc/config`, so a dump taken
-from a configured router carries whatever that router was configured with. The
-one here was taken from a device that had already been reset to factory
-defaults, which is the state you want a published dump to be in.
+`rootfs_data` is where a running system keeps `/etc/config`, and this dump was
+taken *before* the device was recovered — while it was still carrying the
+configuration that had locked it out. The overlay is not empty: 3282 UBIFS
+nodes sit in that region. So `/etc/config/wireless` and `/etc/shadow` are in
+here, which means the WiFi passphrase and the root password hash are too.
+
+They are not visible to `strings`, because UBIFS compresses them. That is not
+protection — `ubireader` on the volume recovers the files in a couple of
+minutes. Treat every secret this router held at the time as published.
 
 ## Reading it without flashing anything
 
