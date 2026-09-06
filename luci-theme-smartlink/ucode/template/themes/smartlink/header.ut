@@ -56,8 +56,14 @@
 			})();
 		</script>
 
-		<link rel="stylesheet" href="{{ media }}/cascade.css">
-		<link rel="stylesheet" media="only screen and (max-device-width: 854px)" href="{{ media }}/mobile.css" type="text/css">
+		{#- The router serves these with an ETag and no Cache-Control, so a
+		    browser is free to keep its copy - and does. Upgrading the package
+		    rewrote the files but not their URLs, which left phones rendering
+		    an old stylesheet against a new page and made every fix look like
+		    it had not shipped. The token below is replaced at build time, so
+		    each release asks for a URL the browser has never seen. -#}
+		<link rel="stylesheet" href="{{ media }}/cascade.css?v=SMARTLINK_VERSION">
+		<link rel="stylesheet" media="only screen and (max-device-width: 854px)" href="{{ media }}/mobile.css?v=SMARTLINK_VERSION" type="text/css">
 		<link rel="icon" href="{{ media }}/favicon.svg" type="image/svg+xml">
 		<link rel="shortcut icon" href="{{ media }}/favicon.png">
 		{% if (node?.css): %}

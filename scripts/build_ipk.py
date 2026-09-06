@@ -21,7 +21,7 @@ import time
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 DIST = ROOT / "dist"
 
-VERSION = "1.4.1-1"
+VERSION = "1.4.2-1"
 MAINTAINER = "Alagha Technology"
 
 THEME_POSTINST = """#!/bin/sh
@@ -145,6 +145,34 @@ def add_dir(tar, name, seen):
         tar.addfile(info)
 
 
+# Files whose asset URLs carry a version, and how many places must be stamped.
+# The count is checked so that renaming a stylesheet cannot quietly turn cache
+# busting off - a browser holding an old stylesheet against a new page is a
+# hard bug to see and an easy one to ship.
+VERSIONED = {"header.ut": 2}
+
+
+def stamp_version(path: pathlib.Path) -> bytes:
+    """The file's bytes, with SMARTLINK_VERSION replaced by this release."""
+    raw = path.read_bytes()
+
+    expected = VERSIONED.get(path.name)
+
+    if expected is None:
+        return raw
+
+    found = raw.count(b"SMARTLINK_VERSION")
+
+    if found != expected:
+        raise SystemExit(
+            "%s has %d version tokens, expected %d - cache busting would be "
+            "wrong. Update VERSIONED in this script, or put the token back."
+            % (path.name, found, expected)
+        )
+
+    return raw.replace(b"SMARTLINK_VERSION", VERSION.encode())
+
+
 def add_tree(tar, src: pathlib.Path, arcname: str, executable, seen):
     """Add a file or directory with root ownership and predictable modes."""
     entries = []
@@ -169,15 +197,16 @@ def add_tree(tar, src: pathlib.Path, arcname: str, executable, seen):
         entries.append((src, arcname))
 
     for path, name in entries:
+        payload = stamp_version(path)
+
         info = tarfile.TarInfo("./" + name)
-        info.size = path.stat().st_size
+        info.size = len(payload)
         info.mode = 0o755 if name in executable else 0o644
         info.mtime = int(time.time())
         info.uid = info.gid = 0
         info.uname = info.gname = "root"
 
-        with open(path, "rb") as fh:
-            tar.addfile(info, fh)
+        tar.addfile(info, io.BytesIO(payload))
 
 
 def make_member(tar, name, content: bytes, mode=0o644):
