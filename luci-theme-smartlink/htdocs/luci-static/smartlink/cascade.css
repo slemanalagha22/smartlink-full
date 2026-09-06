@@ -1821,8 +1821,29 @@ body.modal-overlay-active #modal_overlay {
 	.brand { font-size: 18px; }
 	.sl-logo { inline-size: 26px; block-size: 26px; }
 
+	/*
+	 * The drawer.
+	 *
+	 * It used to be display:none until it was display:flex, which is a state
+	 * change with nothing in between - the panel simply existed, mid-tap. It
+	 * is absolutely positioned, so it costs nothing to leave it laid out and
+	 * move it instead: it drops the last few pixels into place and fades in.
+	 *
+	 * visibility carries the delay so a closed drawer takes no taps, and it
+	 * flips back the instant the drawer opens rather than at the end of the
+	 * fade. Anyone who has asked their system for less motion gets the state
+	 * change without the travel - the block near the top of this file shortens
+	 * every transition to nothing.
+	 */
 	#topmenu {
-		display: none;
+		display: flex;
+		opacity: 0;
+		visibility: hidden;
+		pointer-events: none;
+		transform: translateY(-10px);
+		transition: opacity .18s ease,
+		            transform .18s cubic-bezier(.2, .7, .3, 1),
+		            visibility 0s linear .18s;
 		position: absolute;
 		inset-block-start: var(--sl-header-h);
 		inset-inline: 0;
@@ -1838,7 +1859,29 @@ body.modal-overlay-active #modal_overlay {
 		box-shadow: var(--sl-shadow-popover);
 	}
 
-	#topmenu.sl-open { display: flex; }
+	#topmenu.sl-open {
+		opacity: 1;
+		visibility: visible;
+		pointer-events: auto;
+		transform: none;
+		transition: opacity .18s ease,
+		            transform .18s cubic-bezier(.2, .7, .3, 1),
+		            visibility 0s;
+	}
+
+	/* The items arrive just behind the panel, so the drawer reads as one
+	   movement that settles rather than a list that appears fully formed. */
+	#topmenu > li {
+		opacity: 0;
+		transform: translateY(-6px);
+		transition: opacity .16s ease .04s, transform .16s ease .04s;
+	}
+
+	#topmenu.sl-open > li { opacity: 1; transform: none; }
+
+	/* The burger turns into what it does. */
+	.sl-menu-toggle .sl-ico { transition: transform .18s ease; }
+	.sl-menu-toggle[aria-expanded="true"] .sl-ico { transform: rotate(90deg); }
 
 	#topmenu > li { block-size: auto; display: block; }
 
