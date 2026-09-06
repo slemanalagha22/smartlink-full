@@ -190,17 +190,58 @@ return baseclass.extend({
 		return E('span', { 'class': cls('sl-chip', accent && 'sl-accent-' + accent) }, text);
 	},
 
+	/*
+	 * A table that a phone can read.
+	 *
+	 * Below the stacking breakpoint the rows become cards and each cell shows
+	 * the column it came from, so the header row can disappear without taking
+	 * the meaning of the values with it. The label is stamped on as data-label
+	 * and drawn by CSS.
+	 *
+	 * Views append their rows to the tbody whenever they repaint, so the
+	 * labelling is driven by an observer rather than done once: any row that
+	 * arrives later is labelled the moment it lands.
+	 */
 	table: function(columns, rows) {
-		return E('div', { 'class': 'sl-table-wrap' }, [
-			E('table', { 'class': 'sl-table' }, [
+		var titles = columns.map(function(c) { return c.title || ''; });
+
+		var tbody = E('tbody', {}, rows),
+		    table = E('table', { 'class': 'sl-table' }, [
 				E('thead', {}, [
 					E('tr', {}, columns.map(function(c) {
 						return E('th', { 'class': c.actions ? 'sl-cell-actions' : null }, c.title);
 					}))
 				]),
-				E('tbody', {}, rows)
-			])
-		]);
+				tbody
+			]);
+
+		function label() {
+			table.querySelectorAll('tbody tr').forEach(function(tr) {
+				tr.querySelectorAll('td').forEach(function(td, i) {
+					/* A cell spanning the row is a message, not a value. */
+					if (td.hasAttribute('colspan') || titles[i] === undefined)
+						return;
+
+					if (!td.hasAttribute('data-label'))
+						td.setAttribute('data-label', titles[i]);
+				});
+			});
+		}
+
+		label();
+
+		/*
+		 * Watch the table rather than the tbody it was built with: a caller
+		 * is free to swap that whole element out - devices.js does - and an
+		 * observer bound to the original would then be watching a node that
+		 * is no longer in the page. Only childList is observed, so stamping
+		 * an attribute here cannot trigger another round.
+		 */
+		if (typeof MutationObserver == 'function')
+			new MutationObserver(label)
+				.observe(table, { childList: true, subtree: true });
+
+		return E('div', { 'class': 'sl-table-wrap' }, [ table ]);
 	},
 
 	emptyRow: function(colspan, text) {

@@ -1992,10 +1992,29 @@ body.modal-overlay-active #modal_overlay {
 
 /* ---- grid ---- */
 
+/*
+ * --sl-cols is a ceiling, not an instruction.
+ *
+ * The views set it inline - w.grid(4, ...) emits style="--sl-cols:4" - and an
+ * inline declaration outranks every media query, so a breakpoint that lowered
+ * --sl-cols could never win: four stat tiles stayed four 66px columns on a
+ * phone. Rather than fight that with !important, the track size carries the
+ * responsiveness itself.
+ *
+ * The minimum of each track is the larger of "an even Nth of the row" and
+ * --sl-col-min. While the row is wide enough for N readable columns the first
+ * term governs and the grid is exactly N across; once an Nth would be narrower
+ * than --sl-col-min the second takes over and auto-fit packs in as many as
+ * genuinely fit, ending at one. No breakpoint decides this - the content width
+ * does.
+ */
 .sl-grid {
 	display: grid;
 	gap: var(--sl-gutter);
-	grid-template-columns: repeat(var(--sl-cols, 4), minmax(0, 1fr));
+	grid-template-columns: repeat(auto-fit, minmax(max(
+		var(--sl-col-min, 200px),
+		calc((100% - (var(--sl-cols, 4) - 1) * var(--sl-gutter)) / var(--sl-cols, 4))
+	), 1fr));
 }
 
 .sl-grid-2 { --sl-cols: 2; }
@@ -2345,15 +2364,181 @@ a.sl-tile:hover .sl-tile-icon,
 
 /* ---- responsive ---- */
 
-@media screen and (max-width: 1100px) { .sl-grid { --sl-cols: 2; } }
-
 @media screen and (max-width: 760px) {
-	.sl-grid { --sl-cols: 1; }
 	.sl-span-2 { grid-column: auto; }
 	.sl-fields { grid-template-columns: 1fr; }
 	.sl-flow { flex-direction: column; gap: 20px; align-items: center; }
 	.sl-flow::before { display: none; }
 	.sl-table-wrap > .sl-table { min-inline-size: 620px; }
+}
+
+/* =====================================================================
+ * Phones
+ *
+ * Everything above is written for a pointer and a wide row. A phone has
+ * neither, so below 640px the page changes shape rather than shrinking:
+ * tables become cards, actions become full-width, and anything that would
+ * have scrolled sideways stops needing to.
+ * ===================================================================== */
+
+@media screen and (max-width: 640px) {
+
+	/* ---- the bar across the top ----
+	 *
+	 * .brand refuses to shrink or wrap, which is right on a desktop and is
+	 * what pushed the header 38px past a 375px screen: the burger, the brand
+	 * and the two icon buttons simply did not fit, and the sticky header - it
+	 * is 100% of the body, not of the scrolled width - stopped short of the
+	 * edge, so the page looked cropped. Let the brand give way instead; the
+	 * hostname truncates before anything else, and the wordmark and controls
+	 * keep their places.
+	 */
+
+	.sl-header-inner { gap: 10px; }
+
+	.brand {
+		flex: 0 1 auto;
+		min-inline-size: 0;
+		font-size: 17px;
+		gap: 8px;
+	}
+
+	.sl-brand-text { flex: 0 0 auto; }
+
+	.sl-brand-host {
+		min-inline-size: 0;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		padding-inline-start: 8px;
+	}
+
+	.sl-menu-toggle { flex: 0 0 auto; padding: 6px; }
+
+	/* Stats and tiles pair up rather than each taking a full screen width.
+	 * Four one-per-row stats put the content itself below the fold. */
+	.sl-grid { --sl-col-min: 140px; }
+
+	/* At half a phone's width the 44px badge and its padding leave a label
+	 * about eight characters wide, so a name like "عرض النطاق الحالي" broke
+	 * over three lines and made one tile of a pair taller than the other.
+	 * Give the words the room instead - the badge is decoration. */
+	.sl-stat { padding: 14px; gap: 10px; }
+	.sl-stat-icon { inline-size: 34px; block-size: 34px; }
+	.sl-stat-icon svg { inline-size: 18px; block-size: 18px; }
+
+	/* A reading is one thing; "1.5 Mb/s" split over two lines reads as two. */
+	.sl-stat-value { font-size: 18px; white-space: nowrap; }
+
+	/* ---- tables become cards ----
+	 *
+	 * A five-column row cannot be read on a 390px screen, and a sideways
+	 * scroll hides the columns that matter most. Each row becomes a card and
+	 * each cell carries its column name, stamped on as data-label by
+	 * widgets.js. Nothing is dropped - it is folded.
+	 */
+
+	.sl-table-wrap { overflow-x: visible; }
+	.sl-table-wrap > .sl-table { min-inline-size: 0; }
+
+	.sl-table,
+	.sl-table tbody,
+	.sl-table tr,
+	.sl-table td { display: block; }
+
+	.sl-table thead { display: none; }
+
+	.sl-table tbody tr {
+		border: 1px solid var(--sl-border);
+		border-radius: var(--sl-radius-control);
+		padding: 4px 14px;
+		margin-block-end: 12px;
+		background: var(--sl-card);
+	}
+
+	.sl-table tbody tr:last-child { margin-block-end: 0; }
+	.sl-table tbody tr:hover td { background: none; }
+
+	.sl-table td {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 12px;
+		padding: 10px 0;
+		border-block-end: 1px solid var(--sl-border);
+	}
+
+	.sl-table td::before {
+		content: attr(data-label);
+		flex: 0 0 auto;
+		font-size: 12px;
+		font-weight: 700;
+		letter-spacing: .03em;
+		color: var(--sl-ink-subtle);
+	}
+
+	/* The first cell is the card's title, not one of its fields. */
+	.sl-table td:first-child {
+		display: block;
+		padding-block-start: 14px;
+	}
+
+	.sl-table td:first-child::before { display: none; }
+
+	.sl-table tbody tr td:last-child { border-block-end: 0; }
+
+	/* An action belongs across the foot of the card, where a thumb is. */
+	.sl-table .sl-cell-actions {
+		display: flex;
+		inline-size: auto;
+		white-space: normal;
+		padding-block: 12px 14px;
+	}
+
+	.sl-table .sl-cell-actions::before { display: none; }
+	.sl-table .sl-cell-actions > * { margin-inline-start: 0; flex: 1 1 auto; }
+
+	/* A cell that spans the row is a message - leave it centred and unlabelled. */
+	.sl-table td[colspan] { display: block; text-align: center; }
+	.sl-table td[colspan]::before { display: none; }
+
+	/* ---- page heading ----
+	 *
+	 * .sl-head-text asks for 260px before it will share a line, which a phone
+	 * cannot give once the 48px icon has taken its place - so the icon sat
+	 * alone on a line of its own with the title beneath it. Let the text take
+	 * whatever is left instead, and bring the icon and heading down a size.
+	 */
+
+	.sl-head { gap: 12px; }
+	.sl-head-text { flex: 1 1 0; }
+	.sl-head-icon { inline-size: 40px; block-size: 40px; }
+	.sl-head-icon svg { inline-size: 20px; block-size: 20px; }
+	.sl-head h1 { font-size: 20px; line-height: 28px; }
+
+	.sl-head-actions {
+		inline-size: 100%;
+		margin-inline-start: 0;
+		display: flex;
+		gap: 8px;
+	}
+
+	.sl-head-actions > .btn,
+	.sl-head-actions > .cbi-button { flex: 1 1 0; }
+
+	/* ---- ports ----
+	 *
+	 * Five sockets wrapping 3-then-2 reads as an accident. A fixed three-wide
+	 * grid puts WAN and the first two LAN ports on one line and the rest
+	 * underneath, evenly, which is closer to how they sit on the box.
+	 */
+
+	.sl-ports { display: grid; grid-template-columns: repeat(3, 1fr); }
+	.sl-port { min-inline-size: 0; }
+
+	/* ---- forms and dialogs ---- */
+
+	.sl-fields { grid-template-columns: 1fr; }
+	.modal { inline-size: auto; margin-inline: 8px; }
 }
 
 /* =====================================================================
