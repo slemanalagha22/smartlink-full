@@ -74,7 +74,10 @@
 		{% if (!blank_page): %}
 		<header class="sl-header">
 			<div class="sl-header-inner">
-				<a class="brand" href="{{ dispatcher.build_url('admin') }}">
+				{#- Home is SMARTLink's home. It used to be admin/, which - with the
+				    mode switcher gone - meant the logo was a one-way door into
+				    LuCI's own pages. -#}
+				<a class="brand" href="{{ dispatcher.build_url('smartlink') }}">
 					<svg class="sl-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
 						<rect x="1" y="1" width="30" height="30" rx="8" fill="currentColor" opacity=".16"/>
 						<path d="M20.8 10.4a6.6 6.6 0 0 0-4.9-2 6.6 6.6 0 0 0-4.7 1.9c-.6.6-.6 1.5 0 2.1.6.6 1.5.6 2.1 0a3.7 3.7 0 0 1 2.6-1c1 0 1.9.4 2.7 1.1.6.6 1.5.5 2.1-.1.6-.6.6-1.4.1-2Zm3.4-3.5A11.4 11.4 0 0 0 16 3.6c-3 0-5.9 1.2-8.1 3.3-.6.6-.6 1.5 0 2.1.6.6 1.5.6 2.1 0A8.4 8.4 0 0 1 16 6.6c2.2 0 4.3.8 5.9 2.3.6.6 1.6.6 2.2 0 .6-.6.6-1.5.1-2Zm-8.2 8.7a3.6 3.6 0 0 0-3.6 3.6c0 .9.3 1.7.9 2.4l2.7 3.2 2.7-3.2c.6-.7.9-1.5.9-2.4a3.6 3.6 0 0 0-3.6-3.6Z" fill="currentColor"/>
@@ -88,8 +91,9 @@
 				<ul class="nav" id="topmenu" style="display:none"></ul>
 
 				<div class="sl-header-actions">
-					{#- Mode switcher: SMARTLink's own pages vs LuCI administration. -#}
-					<ul class="breadcrumb" id="modemenu" style="display:none"></ul>
+					{#- No mode switcher: SMARTLink is the whole interface. LuCI's
+					    own pages stay reachable by URL for recovery, but nothing
+					    in the chrome offers them. -#}
 					<div id="indicators" class="pull-right"></div>
 					<button type="button" class="sl-icon-btn sl-theme-toggle" id="sl-theme-toggle"
 					        title="{{ _('Toggle colour scheme') }}" aria-label="{{ _('Toggle colour scheme') }}">

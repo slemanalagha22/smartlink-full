@@ -95,25 +95,36 @@ return baseclass.extend({
 		return ul;
 	},
 
+	/*
+	 * Pick the branch of the menu tree this request belongs to and draw its
+	 * top menu.
+	 *
+	 * LuCI's own themes put a switcher here - SMARTLink on one side,
+	 * Administration on the other - and offering that turns a finished router
+	 * interface back into a toolkit for whoever opens it. The branch is still
+	 * chosen the same way, so an admin URL typed by hand still renders with
+	 * its own navigation; there is simply nothing in the chrome that leads
+	 * anyone there.
+	 */
 	renderModeMenu(tree) {
-		const ul = document.querySelector('#modemenu');
 		const children = ui.menu.getChildren(tree);
 
-		children.forEach((child, index) => {
-			const isActive = L.env.requestpath.length
-				? child.name === L.env.requestpath[0]
-				: index === 0;
+		/*
+		 * Always navigate by SMARTLink's own menu, whichever branch the
+		 * current page belongs to.
+		 *
+		 * Rendering the branch of the request seemed the honest thing to do,
+		 * but with the mode switcher gone it was a trap: land on an admin URL
+		 * - and the logo used to be one - and every link in the header led
+		 * further into LuCI, with nothing pointing back. Showing SMARTLink's
+		 * menu on those pages means the way out is always one tap away.
+		 */
+		const home = children.find((child) => child.name === 'smartlink');
 
-			ul.appendChild(E('li', { 'class': isActive ? 'active' : '' }, [
-				E('a', { 'href': L.url(child.name) }, [ _(child.title) ])
-			]));
-
-			if (isActive)
-				this.renderMainMenu(child, child.name);
-		});
-
-		if (ul.children.length > 1)
-			ul.style.display = '';
+		if (home)
+			this.renderMainMenu(home, home.name);
+		else if (children.length)
+			this.renderMainMenu(children[0], children[0].name);
 	},
 
 	/* Theme toggle, mobile drawer and dropdown behaviour. */

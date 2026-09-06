@@ -580,45 +580,6 @@ small { font-size: 12px; line-height: 16px; color: var(--sl-ink-subtle); }
 	font-weight: 700;
 }
 
-/* Mode switcher - lives in the header, between SMARTLink and LuCI admin. */
-#modemenu {
-	display: flex;
-	gap: 2px;
-	margin: 0;
-	padding: 3px;
-	list-style: none;
-	border-radius: var(--sl-radius-chip);
-	background: rgba(0, 0, 0, .14);
-}
-
-:root[data-darkmode="true"] #modemenu { background: rgba(255, 255, 255, .06); }
-
-#modemenu > li > a {
-	display: inline-block;
-	padding: 5px 14px;
-	border-radius: var(--sl-radius-chip);
-	color: var(--sl-header-fg-dim);
-	font-size: 13px;
-	font-weight: 600;
-	white-space: nowrap;
-	transition: background-color .15s ease, color .15s ease;
-}
-
-#modemenu > li > a:hover {
-	color: var(--sl-header-fg);
-	background: var(--sl-header-hover);
-	text-decoration: none;
-}
-
-#modemenu > li.active > a {
-	background: var(--sl-header-fg);
-	color: var(--sl-header-bg);
-}
-
-:root[data-darkmode="true"] #modemenu > li.active > a {
-	background: var(--sl-primary-bright);
-	color: #ffffff;
-}
 /* ---------------------------------------------------------------- layout */
 
 #maincontent,
@@ -1908,7 +1869,6 @@ body.modal-overlay-active #modal_overlay {
 	}
 
 	#indicators { display: none; }
-	#modemenu { display: none; }
 
 	.cbi-section-node,
 	.cbi-section-node > .cbi-tab { grid-template-columns: 1fr; }
@@ -2534,6 +2494,57 @@ a.sl-tile:hover .sl-tile-icon,
 
 	.sl-ports { display: grid; grid-template-columns: repeat(3, 1fr); }
 	.sl-port { min-inline-size: 0; }
+
+	/* ---- the connection flow ----
+	 *
+	 * The badge is pinned to the corner of the icon, which works when it holds
+	 * a number. It holds "س 10 د 14" and "متصل 3", and a pill that wide hanging
+	 * off a 64px circle in a stacked column reads as a mistake rather than a
+	 * label - the words end up beside the icon with nothing holding them.
+	 *
+	 * On a phone each step becomes a row instead: the icon, then what it is,
+	 * then its reading at the far end. display:contents lifts the icon and the
+	 * badge out of their wrapper so all three can sit on one line, and order
+	 * puts them in the sequence they are read in.
+	 */
+
+	.sl-flow { gap: 10px; inline-size: 100%; }
+
+	.sl-flow-node {
+		flex-direction: row;
+		align-items: center;
+		gap: 12px;
+		inline-size: 100%;
+		padding: 10px 12px;
+		border-radius: var(--sl-radius-control);
+		background: var(--sl-inset);
+	}
+
+	.sl-flow-wrap { display: contents; }
+
+	.sl-flow-icon {
+		inline-size: 44px;
+		block-size: 44px;
+		flex: 0 0 auto;
+		box-shadow: none;
+	}
+
+	.sl-flow-icon svg { inline-size: 22px; block-size: 22px; }
+
+	.sl-flow-label {
+		order: 2;
+		flex: 1 1 auto;
+		text-align: start;
+		font-size: 15px;
+	}
+
+	.sl-flow-badge {
+		order: 3;
+		position: static;
+		flex: 0 0 auto;
+		font-size: 12px;
+		padding: 3px 10px;
+	}
 
 	/* ---- forms and dialogs ---- */
 
