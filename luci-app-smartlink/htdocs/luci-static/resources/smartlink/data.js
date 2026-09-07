@@ -321,7 +321,9 @@ return baseclass.extend({
 			[ 'luci-rpc',          'getDHCPLeases' ],
 			[ 'luci-rpc',          'getHostHints' ],
 			[ 'luci-rpc',          'getNetworkDevices' ],
-			[ 'luci',              'getBuiltinEthernetPorts' ]
+			[ 'luci',              'getBuiltinEthernetPorts' ],
+			[ 'file',              'exec', { command: '/sbin/bridge',
+			                                 params: [ 'fdb', 'show', 'br', 'br-lan' ] } ]
 		]).then(function(r) {
 			return {
 				board:      r[0] || {},
@@ -331,7 +333,8 @@ return baseclass.extend({
 				leases:     r[4] || {},
 				hints:      r[5] || {},
 				devices:    r[6] || {},
-				builtin:    (r[7] && r[7].result) || null
+				builtin:    (r[7] && r[7].result) || null,
+				fdb:        (r[8] && r[8].code === 0) ? (r[8].stdout || '') : null
 			};
 		});
 	},
@@ -662,15 +665,114 @@ return baseclass.extend({
 		return out;
 	},
 
+	/*
+	 * Which physical port each MAC address is reached through, read from the
+	 * bridge's own forwarding table.
+	 *
+	 *   4e:71:56:5c:8e:76 dev phy1-ap0 master br-lan
+	 *   00:d4:9e:28:43:ad dev lan2 master br-lan
+	 *
+	 * "self" and "permanent" entries are the bridge's own addresses, not
+	 * anyone's client. Everything else was learned from a frame that actually
+	 * arrived, which is what makes this evidence rather than inference.
+	 */
+	fdbFrom: function(text) {
+		var out = {};
+
+		String(text || '').split('\n').forEach(function(line) {
+			var parts = line.trim().split(/\s+/);
+
+			if (parts.length < 3 || parts[1] !== 'dev')
+				return;
+
+			if (line.indexOf(' self') >= 0 || line.indexOf('permanent') >= 0)
+				return;
+
+			out[parts[0].toUpperCase()] = parts[2];
+		});
+
+		return out;
+	},
+
+	/* The router's own ethernet ports, and whether anything is plugged in. */
+	ethPorts: function(snap) {
+		var devs = snap.devices || {},
+		    names = (snap.builtin || []).map(function(p) { return p.device; }),
+		    live = false;
+
+		if (!names.length)
+			names = Object.keys(devs).filter(function(n) { return /^(lan\d+|wan\d*|eth\d+)$/.test(n); });
+
+		names.forEach(function(n) {
+			var d = devs[n] || {}, link = d.link || {};
+
+			if (link.carrier !== undefined ? link.carrier : d.carrier)
+				live = true;
+		});
+
+		return { names: names, anyCarrier: live };
+	},
+
+	/*
+	 * Who is on the network, and how they are attached.
+	 *
+	 * Two sources say a device is here: an association list, and the bridge's
+	 * forwarding table. Both are records of frames that actually arrived, so
+	 * both are evidence. The lease table and the neighbour table are memory -
+	 * they hold devices that left hours ago - and are used only to put a name
+	 * and an address to something already known to be present.
+	 */
 	clientsFrom: function(snap, radios) {
 		var self = this,
 		    byMac = {},
-		    hints = snap.hints || {};
+		    hints = snap.hints || {},
+		    subnets = self.localSubnets(snap),
+		    own = self.ownMacs(snap),
+		    fdb = self.fdbFrom(snap.fdb),
+		    eth = self.ethPorts(snap),
+		    haveFdb = snap.fdb != null;
 
 		function hint(mac) {
 			return hints[mac] || hints[String(mac).toUpperCase()] || {};
 		}
 
+		function isLocal(ip) {
+			var n = ipToInt(ip);
+
+			if (n == null)
+				return false;
+
+			return subnets.some(function(s) {
+				return ((n & s[1]) >>> 0) === s[0];
+			});
+		}
+
+		/* The socket a device is reached through, or null if it is not on one. */
+		function wiredPort(mac) {
+			var dev = fdb[mac];
+
+			return dev && eth.names.indexOf(dev) >= 0 ? dev : null;
+		}
+
+		/*
+		 * Wired, if that can be shown. The bridge names the port it forwards
+		 * to; where it cannot be read, fall back to inference - but never onto
+		 * a router with every socket empty, because that answer is knowably
+		 * wrong.
+		 */
+		function asWired(mac, extra) {
+			var port = wiredPort(mac);
+
+			if (port)
+				return Object.assign({ mac: mac, kind: 'wired', band: null, port: port }, extra);
+
+			if (haveFdb || !eth.anyCarrier)
+				return null;
+
+			return Object.assign({ mac: mac, kind: 'wired', band: null }, extra);
+		}
+
+		/* Associated to one of our own access points. */
 		radios.forEach(function(radio) {
 			(radio.stations || []).forEach(function(st) {
 				var mac = String(st.mac || '').toUpperCase();
@@ -692,48 +794,49 @@ return baseclass.extend({
 			});
 		});
 
+		/* On a cable: the bridge forwards to it through a physical port. */
+		Object.keys(fdb).forEach(function(mac) {
+			if (byMac[mac] || own[mac])
+				return;
+
+			var entry = asWired(mac, { name: hint(mac).name || null, ip: null });
+
+			if (entry)
+				byMac[mac] = entry;
+		});
+
+		/*
+		 * A lease says an address was handed out, not that its holder is still
+		 * here - they last hours. So a lease fills in the address and hostname
+		 * of a device already seen, and only introduces one if the cable
+		 * evidence backs it up.
+		 */
 		((snap.leases || {}).dhcp_leases || []).forEach(function(lease) {
 			var mac = String(lease.macaddr || '').toUpperCase();
 
-			if (!mac)
+			if (!mac || own[mac])
 				return;
 
-			if (!byMac[mac])
-				byMac[mac] = { mac: mac, kind: 'wired', band: null, name: null };
+			if (!byMac[mac]) {
+				var entry = asWired(mac, { name: null, ip: null });
+
+				if (!entry)
+					return;
+
+				byMac[mac] = entry;
+			}
 
 			byMac[mac].ip = lease.ipaddr || byMac[mac].ip;
 			byMac[mac].name = byMac[mac].name || lease.hostname || null;
 			byMac[mac].expires = lease.expires;
 		});
 
-		/*
-		 * A wired device is not obliged to ask us for an address. One with a
-		 * static IP, or one whose lease was handed out by an upstream router
-		 * while we bridge, never appears in dhcp_leases - but it does appear
-		 * in the neighbour table the moment it talks to anything.
-		 *
-		 * So take the hints too, keeping only what is addressed on one of our
-		 * own subnets and is not the router itself. Without this the wired
-		 * count reads zero on a repeater whose clients are served upstream.
-		 */
-		var subnets = self.localSubnets(snap),
-		    own = self.ownMacs(snap);
-
-		function isLocal(ip) {
-			var n = ipToInt(ip);
-
-			if (n == null)
-				return false;
-
-			return subnets.some(function(s) {
-				return ((n & s[1]) >>> 0) === s[0];
-			});
-		}
-
+		/* The neighbour table is memory too - it names and addresses, and it
+		   introduces a device only on the same cable evidence. */
 		Object.keys(hints).forEach(function(raw) {
 			var mac = String(raw).toUpperCase();
 
-			if (byMac[mac] || own[mac])
+			if (own[mac])
 				return;
 
 			var ip = (hints[raw].ipaddrs || []).filter(isLocal)[0];
@@ -741,13 +844,17 @@ return baseclass.extend({
 			if (!ip)
 				return;
 
-			byMac[mac] = {
-				mac:  mac,
-				kind: 'wired',
-				band: null,
-				name: hints[raw].name || null,
-				ip:   ip
-			};
+			if (!byMac[mac]) {
+				var entry = asWired(mac, { name: hints[raw].name || null, ip: ip });
+
+				if (!entry)
+					return;
+
+				byMac[mac] = entry;
+			}
+
+			byMac[mac].ip = byMac[mac].ip || ip;
+			byMac[mac].name = byMac[mac].name || hints[raw].name || null;
 		});
 
 		Object.keys(byMac).forEach(function(mac) {

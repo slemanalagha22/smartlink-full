@@ -21,7 +21,7 @@ import time
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 DIST = ROOT / "dist"
 
-VERSION = "1.4.4-1"
+VERSION = "1.5.1-1"
 # The module name L.require() is given, and the filename it resolves to. It has
 # to survive that call's name.replace(/\./g, "/"), so no dots.
 SLUG = "smartlink-" + VERSION.replace(".", "_").replace("-", "_")

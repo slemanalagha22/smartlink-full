@@ -160,7 +160,9 @@ return view.extend({
 							E('div', { 'class': 'sl-device-sub' },
 								client.kind === 'wifi'
 									? ((client.ssid || 'Wi-Fi') + (client.signal != null ? ' · %d dBm'.format(client.signal) : ''))
-									: 'اتصال سلكي')
+									: (client.port
+										? 'منفذ %s'.format(client.port.replace(/^lan/, 'LAN ').toUpperCase())
+										: 'اتصال سلكي'))
 						])
 					])
 				]),

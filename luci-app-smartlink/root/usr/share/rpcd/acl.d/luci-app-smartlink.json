@@ -63,6 +63,9 @@
 				"/sbin/logread": [
 					"exec"
 				],
+				"/sbin/bridge": [
+					"exec"
+				],
 				"/usr/lib/opkg/info/*": [
 					"read"
 				]
