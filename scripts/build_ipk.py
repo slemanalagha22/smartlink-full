@@ -21,7 +21,10 @@ import time
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 DIST = ROOT / "dist"
 
-VERSION = "1.4.3-1"
+VERSION = "1.4.4-1"
+# The module name L.require() is given, and the filename it resolves to. It has
+# to survive that call's name.replace(/\./g, "/"), so no dots.
+SLUG = "smartlink-" + VERSION.replace(".", "_").replace("-", "_")
 MAINTAINER = "Alagha Technology"
 
 THEME_POSTINST = """#!/bin/sh
@@ -92,7 +95,7 @@ PACKAGES = [
         "source": ROOT / "luci-theme-smartlink",
         "layout": [
             ("htdocs/luci-static/smartlink", "www/luci-static/smartlink"),
-            ("htdocs/luci-static/resources/menu-smartlink.js", "www/luci-static/resources/menu-smartlink.js"),
+            ("htdocs/luci-static/resources/menu-smartlink.js", "www/luci-static/resources/menu-%s.js" % SLUG),
             ("htdocs/luci-static/resources/view/smartlink/sysauth.js", "www/luci-static/resources/view/smartlink/sysauth.js"),
             ("ucode/template/themes/smartlink", "usr/share/ucode/luci/template/themes/smartlink"),
             ("root/etc/uci-defaults/30_luci-theme-smartlink", "etc/uci-defaults/30_luci-theme-smartlink"),
@@ -149,7 +152,8 @@ def add_dir(tar, name, seen):
 # The count is checked so that renaming a stylesheet cannot quietly turn cache
 # busting off - a browser holding an old stylesheet against a new page is a
 # hard bug to see and an easy one to ship.
-VERSIONED = {"header.ut": 2}
+VERSIONED = {"header.ut": 2, "footer.ut": 1}
+
 
 
 def stamp_version(path: pathlib.Path) -> bytes:
@@ -161,7 +165,7 @@ def stamp_version(path: pathlib.Path) -> bytes:
     if expected is None:
         return raw
 
-    found = raw.count(b"SMARTLINK_VERSION")
+    found = raw.count(b"SMARTLINK_VERSION") + raw.count(b"SMARTLINK_SLUG")
 
     if found != expected:
         raise SystemExit(
@@ -170,7 +174,9 @@ def stamp_version(path: pathlib.Path) -> bytes:
             % (path.name, found, expected)
         )
 
-    return raw.replace(b"SMARTLINK_VERSION", VERSION.encode())
+    return (raw
+            .replace(b"SMARTLINK_SLUG", SLUG.encode())
+            .replace(b"SMARTLINK_VERSION", VERSION.encode()))
 
 
 def add_tree(tar, src: pathlib.Path, arcname: str, executable, seen):

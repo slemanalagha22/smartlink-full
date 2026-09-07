@@ -27,7 +27,20 @@
 			</div>
 		</footer>
 
-		<script type="text/javascript">L.require('menu-smartlink')</script>
+		{#- The module name carries the release.
+
+		    L.require() appends a ?v= of its own, but it is LuCI's build string
+		    and does not move when SMARTLink is upgraded - so a browser kept the
+		    script it already had. New markup against old script is not merely
+		    stale, it is broken: the old one reached for #modemenu, which this
+		    theme no longer renders, threw on the null, and never got as far as
+		    binding the menu button or the theme toggle. Both simply stopped
+		    working, with nothing on screen to say why.
+
+		    A name that changes with the release is a URL the browser has to go
+		    and fetch. The build stamps it into both this call and the filename
+		    it installs. -#}
+		<script type="text/javascript">L.require('menu-SMARTLINK_SLUG')</script>
 		{% endif %}
 	</body>
 </html>
